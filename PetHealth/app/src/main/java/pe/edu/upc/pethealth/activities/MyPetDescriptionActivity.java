@@ -9,9 +9,12 @@ import pe.edu.upc.pethealth.R;
 import pe.edu.upc.pethealth.models.MyPet;
 
 public class MyPetDescriptionActivity extends AppCompatActivity {
-    ImageView myPetImageView;
+
     TextView nameTextView;
+    ImageView myPetImageView;
     TextView descriptionTextView;
+    TextView raceTextView;
+    TextView ageTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +22,16 @@ public class MyPetDescriptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_pet_description);
 
         MyPet myPet = MyPet.from(getIntent().getExtras());
-        myPetImageView = (ImageView) findViewById(R.id.myPetImageView);
         nameTextView = (TextView) findViewById(R.id.petNameTextView);
-        descriptionTextView = (TextView) findViewById(R.id.myPetDescriptionTextView);
+        myPetImageView  =(ImageView) findViewById(R.id.myPetImageView);
+        raceTextView = (TextView) findViewById(R.id.petRaceTextView);
+        ageTextView= (TextView) findViewById(R.id.petAgeTextView);
+        descriptionTextView = (TextView) findViewById(R.id.petDescriptionTextView);
 
-        myPetImageView.setImageResource(myPet.getImage());
         nameTextView.setText(myPet.getName());
+        myPetImageView.setImageResource(myPet.getImage());
+        raceTextView.setText(myPet.getRace());
+        ageTextView.setText(Integer.toString(myPet.getAge()));
         descriptionTextView.setText(myPet.getDescription());
 
     }

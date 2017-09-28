@@ -4,40 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
     tools:context="pe.edu.upc.pethealth.activities.MyPetDescriptionActivity">
-
-    <ImageView
-        android:id="@+id/myPetImageView"
-        android:layout_width="180dp"
-        android:layout_height="279dp"
-        android:layout_margin="@dimen/big_margin"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
         android:id="@+id/petNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/big_margin"
-        android:text="@string/pet_name"
+        android:text="My Pet"
+        android:textColor="@color/colorPrimaryText"
+        android:textAppearance="?android:textAppearanceLarge"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/myPetImageView"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/default_margin"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <ImageView
+        android:id="@+id/myPetImageView"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_margin="@dimen/default_margin"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
     <TextView
-        android:id="@+id/myPetDescriptionTextView"
+        android:id="@+id/petRaceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/big_margin"
-        android:text="@string/pet_description"
-        app:layout_constraintStart_toEndOf="@id/myPetImageView"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/default_margin"
+        android:text="Race"
+        android:textColor="@color/colorSecondaryText"
+        android:textAppearance="?android:textAppearanceMedium"
         app:layout_constraintTop_toBottomOf="@id/petNameTextView"
-        />
+        app:layout_constraintStart_toEndOf="@id/myPetImageView"/>
+    <TextView
+        android:id="@+id/petAgeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:text="Age"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/colorSecondaryText"
+        app:layout_constraintStart_toEndOf="@id/myPetImageView"
+        app:layout_constraintTop_toBottomOf="@id/petRaceTextView"/>
+    <TextView
+        android:id="@+id/petDescriptionTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:text="Description"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="@color/colorSecondaryText"
+        app:layout_constraintStart_toEndOf="@id/myPetImageView"
+        app:layout_constraintTop_toBottomOf="@id/petAgeTextView"/>
 
 
 </android.support.constraint.ConstraintLayout>

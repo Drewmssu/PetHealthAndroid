@@ -18,15 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activities.MyPetDescriptionActivity"
-            android:label="@string/title_activity_myPet"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".activities.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="pe.edu.upc.pethealth.activities.MainActivity"/>
-        </activity>
+        <activity android:name=".activities.MyPetDescriptionActivity" />
         <activity android:name=".activities.HistoryClinicActivity"></activity>
     </application>
 
