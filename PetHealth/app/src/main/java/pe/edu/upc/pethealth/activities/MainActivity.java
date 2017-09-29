@@ -1,10 +1,12 @@
 package pe.edu.upc.pethealth.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -39,6 +41,24 @@ public class MainActivity extends AppCompatActivity {
         navigateAccordingTo(R.id.navigation_home);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        //this adds items to the action bar if present
+        getMenuInflater().inflate(R.menu.navigation, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        switch (item.getItemId()){
+            case R.id.action_profile:
+                startActivity(new Intent(this, ProfileActivity.class));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private boolean navigateAccordingTo(int id){
         try{
             getSupportFragmentManager().beginTransaction()
@@ -56,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.navigation_mypets: return new MyPetsFragment();
             case R.id.navigation_chat: return new ChatsFragment();
             case R.id.navigation_notifications: return new NotificationsFragment();
-
         }
         return null;
     }
