@@ -3,12 +3,17 @@ package pe.edu.upc.pethealth.activities;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import pe.edu.upc.pethealth.R;
+import pe.edu.upc.pethealth.fragments.ChatsFragment;
+import pe.edu.upc.pethealth.fragments.HomeFragment;
+import pe.edu.upc.pethealth.fragments.MyPetsFragment;
+import pe.edu.upc.pethealth.fragments.NotificationsFragment;
 import pe.edu.upc.pethealth.models.Person;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -28,21 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_mypets:
-                    mTextMessage.setText(R.string.title_mypets);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
-                case R.id.navigation_chat:
-                    mTextMessage.setText(R.string.title_chat);
-                    return true;
-            }
-            return false;
+            return navigateAccordingTo(item.getItemId());
         }
 
     };
@@ -52,7 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        Person person = Person.from(getIntent().getExtras());
+        Person person = new Person(1,R.mipmap.ic_launcher,"123456@gmail.com","Renato","Castro","76249104","Av.salvarry","966991826");
         profilePictureImageView = (ImageView) findViewById(R.id.personProfilePictureImageView);
         nameTextView = (TextView) findViewById(R.id.personNameTextView);
         lastNameTextView = (TextView) findViewById(R.id.personLastNameTextView);
@@ -73,4 +64,24 @@ public class ProfileActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+    private boolean navigateAccordingTo(int id){
+        try{
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content,getFragmentFor(id)).commit();
+            return true;
+        }catch (NullPointerException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private Fragment getFragmentFor(int id){
+        switch (id){
+            case R.id.navigation_home: return new HomeFragment();
+            case R.id.navigation_mypets: return new MyPetsFragment();
+            case R.id.navigation_chat: return new ChatsFragment();
+            case R.id.navigation_notifications: return new NotificationsFragment();
+        }
+        return null;
+    }
 }

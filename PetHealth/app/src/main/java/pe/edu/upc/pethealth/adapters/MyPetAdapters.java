@@ -13,6 +13,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import pe.edu.upc.pethealth.R;
+import pe.edu.upc.pethealth.activities.HistoryClinicActivity;
 import pe.edu.upc.pethealth.activities.MyPetDescriptionActivity;
 import pe.edu.upc.pethealth.models.MyPet;
 
@@ -45,6 +46,14 @@ public class MyPetAdapters extends RecyclerView.Adapter<MyPetAdapters.ViewHolder
                 Context context = view.getContext();
                 Intent intent = new Intent(context, MyPetDescriptionActivity.class);
                 intent.putExtras(myPet.toBundle());
+                context.startActivity(intent);
+            }
+        });
+        holder.clinicHystoryImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = view.getContext();
+                Intent intent = new Intent(context, HistoryClinicActivity.class);
                 context.startActivity(intent);
             }
         });
