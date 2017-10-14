@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,7 +45,13 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        Person person = new Person(1,R.mipmap.ic_launcher,"123456@gmail.com","Renato","Castro","76249104","Av.salvarry","966991826");
+        Person person = new Person(1,R.mipmap.ic_launcher,"123456@gmail.com","Renato","Castro","76249104","Av.Salvarry","966991826");
+
+        Toolbar myToolBar= (Toolbar) findViewById(R.id.profileToolbar);
+        setSupportActionBar(myToolBar);
+        ActionBar ab = getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
+
         profilePictureImageView = (ImageView) findViewById(R.id.personProfilePictureImageView);
         nameTextView = (TextView) findViewById(R.id.personNameTextView);
         lastNameTextView = (TextView) findViewById(R.id.personLastNameTextView);

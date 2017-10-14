@@ -21,7 +21,7 @@ public class SingUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
-                Intent intent = new Intent(context,LoginActivity.class);
+                Intent intent = new Intent(context,StartActivity.class);
                 context.startActivity(intent);
             }
         });

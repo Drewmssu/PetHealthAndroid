@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
         myTipRecyclerView = (RecyclerView) view.findViewById(R.id.myTipRecyclerView);
         myTips = new ArrayList<>();
         myTipAdapters = new MyTipAdapters(MyTipsRepository.getMyTips());
-        myTipLayoutManager = new LinearLayoutManager(view.getContext());
+        myTipLayoutManager = new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,false);
         myTipRecyclerView.setAdapter(myTipAdapters);
         myTipRecyclerView.setLayoutManager(myTipLayoutManager);
         return view;
