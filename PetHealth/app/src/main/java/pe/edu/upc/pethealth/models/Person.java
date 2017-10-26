@@ -19,7 +19,7 @@ public class Person {
         public Person() {
         }
 
-    public Person(int id, int photo, String mail, String name, String lastName, String dni, String address, String phone) {
+    public Person(int id, int photo, String name,String lastName, String dni, String mail,String phone, String address) {
         this.id = id;
         this.setPhoto(photo);
         this.setMail(mail);

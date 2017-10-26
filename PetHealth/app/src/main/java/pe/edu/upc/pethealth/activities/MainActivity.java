@@ -2,6 +2,7 @@ package pe.edu.upc.pethealth.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -57,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.navigation_logout:
-                startActivity(new Intent(this, ProfileActivity.class));
+                finish();
+                System.exit(0);
                 return true;
             case R.id.navigation_profile:
                 getSupportFragmentManager().beginTransaction()
