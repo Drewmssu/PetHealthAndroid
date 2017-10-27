@@ -5,9 +5,6 @@
     <dimen name="default_margin">8dp</dimen>
     <dimen name="big_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-<<<<<<< HEAD
     <dimen name="super_big_margin">100dp</dimen>
-=======
     <dimen name="minimun_margin">4dp</dimen>
->>>>>>> 9522bc0afe319e6ff85bda5dc77f2fd6de346d2a
 </resources>
