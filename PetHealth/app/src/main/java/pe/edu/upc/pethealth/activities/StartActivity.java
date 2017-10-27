@@ -20,7 +20,7 @@ public class StartActivity extends AppCompatActivity {
 
     private ImageView logoImageView;
     private EditText userEditText;
-    private EditText passwordEditText;
+    private EditText passwordTextInputEditText;
     private Button signInButton;
     private TextView signUptextView;
 
@@ -32,7 +32,7 @@ public class StartActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         logoImageView = (ImageView) findViewById(R.id.logoImageView);
         userEditText = (EditText) findViewById(R.id.emailEditText);
-        passwordEditText = (EditText) findViewById(R.id.passwordEditTextView);
+        passwordTextInputEditText = (EditText) findViewById(R.id.passwordTextInputEditText);
         signInButton = (Button) findViewById(R.id.signInButton);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,19 +63,19 @@ public class StartActivity extends AppCompatActivity {
 
         // Reset errors.
         userEditText.setError(null);
-        passwordEditText.setError(null);
+        passwordTextInputEditText.setError(null);
 
         // Store values at the time of the login attempt.
         String email = userEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
+        String password = passwordTextInputEditText.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            passwordEditText.setError(getString(R.string.error_invalid_password));
-            focusView = passwordEditText;
+            passwordTextInputEditText.setError(getString(R.string.error_invalid_password));
+            focusView = passwordTextInputEditText;
             cancel = true;
         }
 
