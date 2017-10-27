@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import pe.edu.upc.pethealth.R;
 
-public class SingUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     Button doneButton;
     @Override

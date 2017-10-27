@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/default_margin"
-    tools:context="pe.edu.upc.pethealth.activities.SingUpActivity">
+    tools:context="pe.edu.upc.pethealth.activities.SignUpActivity">
 
     <TextView
         android:id="@+id/signUpTextView"
