@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -37,16 +38,7 @@
             android:textColor="@color/colorSecondaryText"
             android:textAppearance="?android:textAppearanceSmall"
             app:layout_constraintTop_toBottomOf="@id/petNameTextView"
-            app:layout_constraintStart_toEndOf="@id/myPetImageView"
-            />
-        <TextView
-            android:id="@+id/moreTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
-            android:text="More"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintStart_toEndOf="@id/myPetImageView" />
         <ImageButton
             android:id="@+id/historyClinicImageButton"
             android:layout_width="14dp"
@@ -54,9 +46,16 @@
             android:layout_margin="@dimen/default_margin"
             app:srcCompat="@drawable/ic_assignment_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/moreTextView"/>
-
-
+            app:layout_constraintStart_toEndOf="@id/myPetImageView" />
+        <TextView
+            android:id="@+id/moreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:textColor="@color/colorPrimaryText"
+            android:text="More"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/historyClinicImageButton"/>
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

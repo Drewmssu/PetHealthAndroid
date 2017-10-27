@@ -1,7 +1,10 @@
 package pe.edu.upc.pethealth.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,13 +28,13 @@ public class MyPetsFragment extends Fragment {
     private RecyclerView myPetsRecyclerView;
     private MyPetAdapters myPetAdapters;
     private RecyclerView.LayoutManager myPetLayoutManager;
+    private FloatingActionButton addPetFloatingActionButton;
     List<MyPet> myPets;
 
     public MyPetsFragment() {
         // Required empty public constructor
 
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +47,19 @@ public class MyPetsFragment extends Fragment {
         myPetLayoutManager = new LinearLayoutManager(view.getContext());
         myPetsRecyclerView.setAdapter(myPetAdapters);
         myPetsRecyclerView.setLayoutManager(myPetLayoutManager);
+        addPetFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.addPetFloatingActionButton);
+        addPetFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "title", Snackbar.LENGTH_LONG)
+                        .setAction("title2", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        }).show();
+            }
+        });
         return view;
 
     }
