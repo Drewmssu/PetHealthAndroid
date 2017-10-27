@@ -2,6 +2,7 @@ package pe.edu.upc.pethealth.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -33,6 +35,7 @@ public class StartActivity extends AppCompatActivity {
     private Button signInButton;
     private Button signUpBtutton;
     private User user;
+    private TextView signUptextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +54,16 @@ public class StartActivity extends AppCompatActivity {
                 attemptLogin();
             }
         });
-        signUpBtutton = (Button) findViewById(R.id.signUpButton);
-        signUpBtutton.setOnClickListener(new View.OnClickListener() {
+        signUptextView = (TextView) findViewById(R.id.signUpTextView);
+        signUptextView.setPaintFlags(signUptextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        signUptextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
-                Intent intent = new Intent(context,SingUpActivity.class);
+                Intent intent = new Intent(context, SignUpActivity.class);
                 context.startActivity(intent);
             }
         });
-
     }
 
     @Override

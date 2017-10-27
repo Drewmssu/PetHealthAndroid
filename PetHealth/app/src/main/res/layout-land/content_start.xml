@@ -15,10 +15,10 @@
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_launcher"
         android:scaleType="center"
-        android:layout_margin="@dimen/super_big_margin"
+        android:layout_margin="@dimen/big_margin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/emailEditText"
@@ -28,7 +28,9 @@
         android:inputType="text"
         android:maxLines="1"
         android:layout_margin="@dimen/default_margin"
-        app:layout_constraintTop_toBottomOf="@id/logoImageView"/>
+        app:layout_constraintTop_toBottomOf="@+id/logoImageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/passwordEditTextView"
@@ -38,7 +40,9 @@
         android:inputType="textPassword"
         android:maxLines="1"
         android:layout_margin="@dimen/default_margin"
-        app:layout_constraintTop_toBottomOf="@id/emailEditText"/>
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <Button
         android:id="@+id/signInButton"
@@ -48,7 +52,9 @@
         android:textColor="@color/colorPrimaryText"
         android:background="@color/colorAccent"
         android:layout_margin="@dimen/big_margin"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditTextView"/>
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
     <TextView
         android:id="@+id/signUpTextView"
         android:layout_width="match_parent"
@@ -58,6 +64,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:gravity="end"
         android:text="@string/login_sign_up_text"
-        android:textColor="@color/colorSecondaryText"/>
+        android:textColor="@color/colorSecondaryText" />
 
 </android.support.constraint.ConstraintLayout>

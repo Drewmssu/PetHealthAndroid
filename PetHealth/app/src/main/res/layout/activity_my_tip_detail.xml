@@ -8,11 +8,13 @@
 
     <com.androidnetworking.widget.ANImageView
         android:id="@+id/detailImageView"
-        android:layout_width="match_parent"
+        android:layout_width="368dp"
         android:layout_height="240dp"
         android:src="@mipmap/ic_launcher"
         android:scaleType="center"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="92dp"
+        android:layout_marginTop="-482dp" />
     <TextView
         android:id="@+id/tittleDetailTextView"
         android:layout_width="wrap_content"
@@ -22,9 +24,10 @@
         android:textColor="@color/colorPrimaryText"
         android:layout_margin="@dimen/big_margin"
         android:textAppearance="?android:textAppearanceLarge"
-        app:layout_constraintTop_toBottomOf="@id/detailImageView"
+        app:layout_constraintTop_toBottomOf="@+id/detailImageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="166dp" />
     <TextView
         android:id="@+id/descriptionDetailTextView"
         android:layout_width="wrap_content"
@@ -33,7 +36,8 @@
         android:textColor="@color/colorSecondaryText"
         android:layout_margin="@dimen/big_margin"
         android:textAppearance="?android:textAppearanceMedium"
-        app:layout_constraintTop_toBottomOf="@id/tittleDetailTextView"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/tittleDetailTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
 
 </android.support.constraint.ConstraintLayout>
