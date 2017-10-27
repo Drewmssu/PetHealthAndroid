@@ -1,7 +1,9 @@
-package pe.edu.upc.pethealth.models;
+package pe.edu.upc.pethealth.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import pe.edu.upc.pethealth.models.Chat;
 
 /**
  * Created by genob on 29/09/2017.
