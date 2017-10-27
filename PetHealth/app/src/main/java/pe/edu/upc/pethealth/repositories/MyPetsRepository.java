@@ -1,9 +1,10 @@
-package pe.edu.upc.pethealth.models;
+package pe.edu.upc.pethealth.repositories;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import pe.edu.upc.pethealth.R;
+import pe.edu.upc.pethealth.models.MyPet;
 
 /**
  * Created by genob on 18/09/2017.

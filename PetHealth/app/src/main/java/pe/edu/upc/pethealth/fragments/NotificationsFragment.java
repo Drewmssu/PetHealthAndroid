@@ -14,7 +14,7 @@ import java.util.List;
 import pe.edu.upc.pethealth.R;
 import pe.edu.upc.pethealth.adapters.NotificationAdapters;
 import pe.edu.upc.pethealth.models.Notification;
-import pe.edu.upc.pethealth.models.NotificationsRepository;
+import pe.edu.upc.pethealth.repositories.NotificationsRepository;
 
 /**
  * A simple {@link Fragment} subclass.

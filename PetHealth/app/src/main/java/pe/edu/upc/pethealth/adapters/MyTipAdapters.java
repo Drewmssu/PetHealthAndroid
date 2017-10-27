@@ -6,14 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.androidnetworking.widget.ANImageView;
 
 import java.util.List;
 
 import pe.edu.upc.pethealth.R;
 import pe.edu.upc.pethealth.activities.MyTipDetailActivity;
-import pe.edu.upc.pethealth.models.MyPet;
 import pe.edu.upc.pethealth.models.MyTip;
 
 /**
@@ -51,8 +51,10 @@ public class MyTipAdapters extends RecyclerView.Adapter<MyTipAdapters.ViewHolder
         final MyTip myTip = myTips.get(position);
         holder.tittleTextView.setText(myTip.getTittle());
         holder.descriptionTextView.setText(myTip.getDescription());
-        holder.tipImageView.setImageResource(myTip.getImage());
-        holder.tipImageView.setOnClickListener(new View.OnClickListener() {
+        holder.tipANImageView.setDefaultImageResId(R.mipmap.ic_launcher);
+        holder.tipANImageView.setErrorImageResId(R.mipmap.ic_launcher);
+        holder.tipANImageView.setImageUrl(myTip.getImage().toString());
+        holder.tipANImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Context context = view.getContext();
@@ -69,12 +71,12 @@ public class MyTipAdapters extends RecyclerView.Adapter<MyTipAdapters.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView tipImageView;
+        ANImageView tipANImageView;
         TextView tittleTextView;
         TextView descriptionTextView;
         public ViewHolder(View itemView) {
             super(itemView);
-            tipImageView = (ImageView) itemView.findViewById(R.id.tipImageView);
+            tipANImageView = (ANImageView) itemView.findViewById(R.id.tipImageView);
             tittleTextView = (TextView) itemView.findViewById(R.id.tipTittleTextView);
             descriptionTextView = (TextView) itemView.findViewById(R.id.tipDescriptionTextView);
         }
