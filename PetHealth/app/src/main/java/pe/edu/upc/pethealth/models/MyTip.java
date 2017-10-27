@@ -97,7 +97,6 @@ public class MyTip {
     }
 
     public static List<MyTip> from(JSONArray jsonTips){
-        System.out.println(jsonTips.length());
         List<MyTip> myTips = new ArrayList<>();
         for(int i =0; i<jsonTips.length();i++){
             try {
