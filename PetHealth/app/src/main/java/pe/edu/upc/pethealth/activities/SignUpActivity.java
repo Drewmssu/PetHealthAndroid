@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 import pe.edu.upc.pethealth.R;
 
-public class SingUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     Button doneButton;
     EditText birthDateEditText;

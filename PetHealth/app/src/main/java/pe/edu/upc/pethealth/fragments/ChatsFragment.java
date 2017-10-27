@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import pe.edu.upc.pethealth.R;
 import pe.edu.upc.pethealth.adapters.ChatAdapters;
-import pe.edu.upc.pethealth.models.ChatsRepository;
+import pe.edu.upc.pethealth.repositories.ChatsRepository;
 
 /**
  * A simple {@link Fragment} subclass.

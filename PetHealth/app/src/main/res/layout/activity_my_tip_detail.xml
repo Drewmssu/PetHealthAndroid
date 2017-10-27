@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="pe.edu.upc.pethealth.activities.MyTipDetailActivity">
 
-    <ImageView
+    <com.androidnetworking.widget.ANImageView
         android:id="@+id/detailImageView"
         android:layout_width="368dp"
         android:layout_height="240dp"

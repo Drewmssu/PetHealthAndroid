@@ -15,7 +15,7 @@ import java.util.List;
 import pe.edu.upc.pethealth.R;
 import pe.edu.upc.pethealth.adapters.MyPetAdapters;
 import pe.edu.upc.pethealth.models.MyPet;
-import pe.edu.upc.pethealth.models.MyPetsRepository;
+import pe.edu.upc.pethealth.repositories.MyPetsRepository;
 
 /**
  * A simple {@link Fragment} subclass.
