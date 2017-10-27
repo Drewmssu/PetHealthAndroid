@@ -77,14 +77,8 @@ public class StartActivity extends AppCompatActivity {
 
         // Reset errors.
         userEditText.setError(null);
-<<<<<<< HEAD
         passwordTextInputEditText.setError(null);
-||||||| merged common ancestors
-        passwordEditText.setError(null);
-=======
-        passwordEditText.setError(null);
         final Context context = this;
->>>>>>> 00c8e0d0c3d3b6248ee2e356e6a421e7d6804e8c
 
         // Store values at the time of the login attempt.
         String email = userEditText.getText().toString();
@@ -94,19 +88,9 @@ public class StartActivity extends AppCompatActivity {
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-<<<<<<< HEAD
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             passwordTextInputEditText.setError(getString(R.string.error_invalid_password));
-            focusView = passwordTextInputEditText;
-||||||| merged common ancestors
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            passwordEditText.setError(getString(R.string.error_invalid_password));
-            focusView = passwordEditText;
-=======
-        if (TextUtils.isEmpty(password)) {
-            passwordEditText.setError(getString(R.string.error_field_required));
-            focusView = passwordEditText;
->>>>>>> 00c8e0d0c3d3b6248ee2e356e6a421e7d6804e8c
+            focusView = passwordTextInputEditText   ;
             cancel = true;
         }
 
@@ -115,7 +99,12 @@ public class StartActivity extends AppCompatActivity {
             userEditText.setError(getString(R.string.error_field_required));
             focusView = userEditText;
             cancel = true;
+        } else if (!isEmailValid(email)) {
+            userEditText.setError(getString(R.string.error_invalid_email));
+            focusView = userEditText;
+            cancel = true;
         }
+
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
