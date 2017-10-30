@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -33,7 +34,6 @@ public class StartActivity extends AppCompatActivity {
     private EditText userEditText;
     private EditText passwordTextInputEditText;
     private Button signInButton;
-    private Button signUpBtutton;
     private User user;
     private TextView signUptextView;
 
@@ -46,7 +46,7 @@ public class StartActivity extends AppCompatActivity {
         user = new User();
         logoImageView = (ImageView) findViewById(R.id.logoImageView);
         userEditText = (EditText) findViewById(R.id.emailEditText);
-        passwordTextInputEditText = (EditText) findViewById(R.id.passwordTextInputEditText);
+        passwordTextInputEditText = (TextInputEditText) findViewById(R.id.passwordTextInputEditText);
         signInButton = (Button) findViewById(R.id.signInButton);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,10 +87,10 @@ public class StartActivity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            passwordTextInputEditText.setError(getString(R.string.error_invalid_password));
-            focusView = passwordTextInputEditText   ;
+        // Check for a valid password.
+        if (TextUtils.isEmpty(password)) {
+            userEditText.setError(getString(R.string.error_field_required));
+            focusView = userEditText;
             cancel = true;
         }
 
@@ -99,12 +99,7 @@ public class StartActivity extends AppCompatActivity {
             userEditText.setError(getString(R.string.error_field_required));
             focusView = userEditText;
             cancel = true;
-        } else if (!isEmailValid(email)) {
-            userEditText.setError(getString(R.string.error_invalid_email));
-            focusView = userEditText;
-            cancel = true;
         }
-
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -145,18 +140,4 @@ public class StartActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isEmailValid(String email) {
-        if(email.equals("admin"))
-            return true;
-        else
-            return false;
-    }
-
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        if(password.equals("admin"))
-            return true;
-        else
-            return false;
-    }
 }
