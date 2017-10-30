@@ -38,7 +38,7 @@ public class SignUpActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(birthDateEditText.getWindowToken(), 0);
 
                 //Asignando el valor escogido en calendar al EditText para que se muestre
-                datePickerDialog = new DatePickerDialog(SingUpActivity.this,
+                datePickerDialog = new DatePickerDialog(SignUpActivity.this,
                         new DatePickerDialog.OnDateSetListener(){
 
                             @Override
