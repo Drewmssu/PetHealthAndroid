@@ -6,10 +6,8 @@ import android.os.Bundle;
  * Created by User on 9/29/2017.
  */
 
-public class Person {
+public class Person  extends User{
         private int id;
-        private int photo;
-        private String mail;
         private String name;
         private String lastName;
         private String dni;
@@ -19,10 +17,8 @@ public class Person {
         public Person() {
         }
 
-    public Person(int id, int photo, String name,String lastName, String dni, String mail,String phone, String address) {
+    public Person(int id, String name,String lastName, String dni,String phone, String address) {
         this.id = id;
-        this.setPhoto(photo);
-        this.setMail(mail);
         this.name = name;
         this.lastName = lastName;
         this.dni = dni;
@@ -36,24 +32,6 @@ public class Person {
 
         public Person setId(int id) {
             this.id = id;
-            return this;
-        }
-
-        public int getPhoto() {
-            return photo;
-        }
-
-        public Person setPhoto(int photo) {
-            this.photo = photo;
-            return this;
-        }
-
-        public String getMail() {
-            return mail;
-        }
-
-        public Person setMail(String mail) {
-            this.mail = mail;
             return this;
         }
 
@@ -105,8 +83,6 @@ public class Person {
         public Bundle toBundle(){
             Bundle bundle = new Bundle();
             bundle.putInt("id", id);
-            bundle.putInt("photo", photo);
-            bundle.putString("mail", mail);
             bundle.putString("name", name);
             bundle.putString("last_name", lastName);
             bundle.putString("dni", dni);
@@ -119,8 +95,6 @@ public class Person {
         public static Person from(Bundle bundle){
             Person person = new Person();
             person.setId(bundle.getInt("id"))
-                    .setPhoto(bundle.getInt("photo"))
-                    .setMail(bundle.getString("mail"))
                     .setName(bundle.getString("name"))
                     .setLastName(bundle.getString("last_name"))
                     .setDni(bundle.getString("dni"))
