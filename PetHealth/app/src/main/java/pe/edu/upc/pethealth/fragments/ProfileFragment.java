@@ -44,7 +44,7 @@ public class ProfileFragment extends Fragment {
         tittleTextView = (TextView) view.findViewById(R.id.tittleTextView);
         photoANImageView = (ANImageView) view.findViewById(R.id.photoANImageView);
         nameTextView = (TextView) view.findViewById(R.id.nameTextView);
-        lastNameTextView = (TextView) view.findViewById(R.id.lastnameTextView);
+        lastNameTextView = (TextView) view.findViewById(R.id.lastNameTextView);
         dniTextView = (TextView) view.findViewById(R.id.dniTextView);
         mailTextView = (TextView) view.findViewById(R.id.mailTextView);
         phoneTextView =(TextView) view.findViewById(R.id.phoneTextView);
