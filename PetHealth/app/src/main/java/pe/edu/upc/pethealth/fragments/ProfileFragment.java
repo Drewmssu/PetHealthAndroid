@@ -40,11 +40,11 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        person = new Person(1,R.mipmap.ic_launcher_round,"Jesus","Cueto","76219104","juanjesus@gmail.com","966991826","Av.Salaveryy 2526");
+      //  person = new Person(1,R.mipmap.ic_launcher_round,"Jesus","Cueto","76219104","juanjesus@gmail.com","966991826","Av.Salaveryy 2526");
         tittleTextView = (TextView) view.findViewById(R.id.tittleTextView);
         photoANImageView = (ANImageView) view.findViewById(R.id.photoANImageView);
         nameTextView = (TextView) view.findViewById(R.id.nameTextView);
-        lastNameTextView = (TextView) view.findViewById(R.id.lastnameTextView);
+        lastNameTextView = (TextView) view.findViewById(R.id.lastNameTextView);
         dniTextView = (TextView) view.findViewById(R.id.dniTextView);
         mailTextView = (TextView) view.findViewById(R.id.mailTextView);
         phoneTextView =(TextView) view.findViewById(R.id.phoneTextView);

@@ -6,6 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,19 +24,17 @@ public class User {
     private String mail;
     private String photo;
     private String bio;
-    private Date creation;
 
     public User() {
     }
 
-    public User(int userId, String username, String password, String mail, String photo, String bio, Date creation) {
+    public User(int userId, String username, String password, String mail, String photo, String bio) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.mail = mail;
         this.photo = photo;
         this.bio = bio;
-        this.creation = creation;
     }
 
     public int getUserId() {
@@ -90,15 +91,6 @@ public class User {
         return this;
     }
 
-    public Date getCreation() {
-        return creation;
-    }
-
-    public User setCreation(Date creation) {
-        this.creation = creation;
-        return this;
-    }
-
     public Bundle toBundle(){
         Bundle bundle = new Bundle();
         bundle.putInt("user_id",userId);
@@ -107,7 +99,6 @@ public class User {
         bundle.putString("mail",mail);
         bundle.putString("photo",photo);
         bundle.putString("bio",bio);
-        bundle.putString("creation",creation.toString());
         return bundle;
     }
     public static User from(Bundle bundle){
@@ -118,7 +109,6 @@ public class User {
                 .setMail(bundle.getString("mail"))
                 .setPhoto(bundle.getString("photo"))
                 .setBio(bundle.getString("bio"));
-                //.setCreation((bundle.getString("creation")));
         return user;
     }
 
