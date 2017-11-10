@@ -25,6 +25,7 @@
     <string name="select_your_birth_date">Select Your Birth Day</string>
     <string name="login_sign_up_text">Sign Up</string>
     <string name="prompt_document_type">Select your document type</string>
+    <string name="title_activity_about_veterinary">Map</string>
 
 
 </resources>

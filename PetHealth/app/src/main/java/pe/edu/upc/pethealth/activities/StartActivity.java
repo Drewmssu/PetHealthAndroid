@@ -24,6 +24,8 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+
 import pe.edu.upc.pethealth.R;
 import pe.edu.upc.pethealth.models.User;
 import pe.edu.upc.pethealth.network.PetHealthApiService;
@@ -64,12 +66,6 @@ public class StartActivity extends AppCompatActivity {
                 context.startActivity(intent);
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.navigation_app_bar,menu);
-        return super.onCreateOptionsMenu(menu);
     }
 
     private void attemptLogin() {
@@ -119,9 +115,9 @@ public class StartActivity extends AppCompatActivity {
                             // do anything with response
                             try {
                                 if ("success".equalsIgnoreCase(response.getString("status"))) {
-                                   // user = user.from(response.getJSONObject("userLog"));
+                                    user = user.from(response.getJSONObject("userLog"));
                                     Intent intent = new Intent(context, MainActivity.class);
-                                    //intent.putExtras(user.toBundle());
+                                    intent.putExtras(user.toBundle());
                                     context.startActivity(intent);
                                 } else {
                                     Log.d(getString(R.string.app_name), "User and password are incorrect");
