@@ -2,6 +2,13 @@ package pe.edu.upc.pethealth.models;
 
 import android.os.Bundle;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by genob on 18/09/2017.
  */
@@ -10,9 +17,9 @@ public class MyPet {
     private int id;
     private String name;
     private String race;
-    private int age;
+    private String age;
     private String description;
-    private int image;
+    private String image;
 
 
 
@@ -21,7 +28,7 @@ public class MyPet {
 
     }
 
-    public MyPet(int id, String name, String race, int age, String description, int image) {
+    public MyPet(int id, String name, String race, String age, String description, String image) {
         this.id = id;
         this.name = name;
         this.race = race;
@@ -58,11 +65,11 @@ public class MyPet {
         return this;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public MyPet setImage(int image) {
+    public MyPet setImage(String image) {
         this.image = image;
         return this;
     }
@@ -76,11 +83,11 @@ public class MyPet {
         return this;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public MyPet setAge(int age) {
+    public MyPet setAge(String age) {
         this.age = age;
         return this;
     }
@@ -90,9 +97,9 @@ public class MyPet {
         bundle.putInt("id",id);
         bundle.putString("name",name);
         bundle.putString("race",race);
-        bundle.putInt("age",age);
+        bundle.putString("age",age);
         bundle.putString("description",description);
-        bundle.putInt("image",image);
+        bundle.putString("image",image);
         return bundle;
     }
 
@@ -101,10 +108,36 @@ public class MyPet {
         myPet.setId(bundle.getInt("id"))
                 .setName(bundle.getString("name"))
                 .setRace(bundle.getString("race"))
-                .setAge(bundle.getInt("age"))
+                .setAge(bundle.getString("age"))
                 .setDescription(bundle.getString("description"))
-                .setImage(bundle.getInt("image"));
+                .setImage(bundle.getString("image"));
         return myPet;
+    }
 
+    public static MyPet from(JSONObject json){
+        MyPet myPet = new MyPet();
+        try {
+            myPet.setId(json.getInt("petId"))
+                    .setName(json.getString("name"))
+                    .setRace(json.getString("race"))
+                    .setAge(json.getString("birthDate"))//TODO fix age
+                    .setDescription(json.getString("description"))
+                    .setImage(json.getString("photo"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return myPet;
+    }
+
+    public static List<MyPet> from(JSONArray jsonpets){
+        List<MyPet> myPets = new ArrayList<>();
+        for(int i =0; i<jsonpets.length();i++){
+            try {
+                myPets.add(from(jsonpets.getJSONObject(i)));
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+        return myPets;
     }
 }

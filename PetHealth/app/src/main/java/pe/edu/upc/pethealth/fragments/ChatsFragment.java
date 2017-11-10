@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import pe.edu.upc.pethealth.R;
+import pe.edu.upc.pethealth.activities.MainActivity;
 import pe.edu.upc.pethealth.adapters.ChatAdapters;
 import pe.edu.upc.pethealth.repositories.ChatsRepository;
 
@@ -31,6 +32,7 @@ public class ChatsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ((MainActivity)getActivity()).setFragmentToolbar("Chat",false,getFragmentManager());
         View view = inflater.inflate(R.layout.fragment_chats, container, false);
         chatRecyclerView = (RecyclerView) view.findViewById(R.id.chatRecyclerView);
         chatAdapters = new ChatAdapters(ChatsRepository.getChats());

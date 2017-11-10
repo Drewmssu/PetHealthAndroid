@@ -6,10 +6,12 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import pe.edu.upc.pethealth.R;
@@ -19,11 +21,12 @@ import pe.edu.upc.pethealth.fragments.MyPetsFragment;
 import pe.edu.upc.pethealth.fragments.NotificationsFragment;
 import pe.edu.upc.pethealth.fragments.ProfileFragment;
 import pe.edu.upc.pethealth.fragments.SearchFragment;
+import pe.edu.upc.pethealth.models.User;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
-
+    private Toolbar toolbar;
+    private User u;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -38,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
+        u = User.from(getIntent().getExtras());
+        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigateAccordingTo(R.id.navigation_home);
@@ -62,11 +65,15 @@ public class MainActivity extends AppCompatActivity {
                 System.exit(0);
                 return true;
             case R.id.navigation_profile:
+                ProfileFragment newfragment = new ProfileFragment();
+                newfragment.setArguments(u.toBundle());
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content, new ProfileFragment()).commit();
+                        .addToBackStack(null)
+                        .replace(R.id.content, newfragment).commit();
                 return true;
             case R.id.navigation_search:
                 getSupportFragmentManager().beginTransaction()
+                        .addToBackStack(null)
                         .replace(R.id.content, new SearchFragment()).commit();
                 return true;
         }
@@ -75,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean navigateAccordingTo(int id){
         try{
+            FragmentManager fm = getSupportFragmentManager();
+            for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+                fm.popBackStack();
+            }
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content,getFragmentFor(id)).commit();
             return true;
@@ -92,5 +103,24 @@ public class MainActivity extends AppCompatActivity {
             case R.id.navigation_notifications: return new NotificationsFragment();
         }
         return null;
+    }
+
+
+    public void setFragmentToolbar(String toolbarTitle, boolean backIcon, final FragmentManager fragmentManager){
+        toolbar.setTitle(toolbarTitle);
+        Integer icon;
+        if(backIcon) {
+            icon = R.drawable.ic_chevron_left_black_24dp;
+            toolbar.setNavigationIcon(icon);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    fragmentManager.popBackStack();
+
+                }
+            });
+        }else{
+            toolbar.setNavigationIcon(null);
+        }
     }
 }

@@ -1,6 +1,5 @@
 package pe.edu.upc.pethealth.adapters;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,8 @@ import com.androidnetworking.widget.ANImageView;
 import java.util.List;
 
 import pe.edu.upc.pethealth.R;
+import pe.edu.upc.pethealth.fragments.AboutVeterinaryFragment;
+import pe.edu.upc.pethealth.activities.MainActivity;
 import pe.edu.upc.pethealth.models.Veterinary;
 
 /**
@@ -57,7 +58,15 @@ public class SearchAdapters extends RecyclerView.Adapter<SearchAdapters.ViewHold
         holder.forwardImageutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                MainActivity context = (MainActivity) view.getContext();
+                AboutVeterinaryFragment newFragment = new AboutVeterinaryFragment();
+                newFragment.setArguments(veterinary.toBundle());
+                context.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content, newFragment)
+                        .addToBackStack(null)
+                        .commit();
+                /*Intent intent = new Intent(context, AboutVeterinaryFragment.class);
+                context.startActivity(intent);*/
             }
         });
     }

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pe.edu.upc.pethealth.R;
+import pe.edu.upc.pethealth.activities.MainActivity;
 import pe.edu.upc.pethealth.adapters.MyTipAdapters;
 import pe.edu.upc.pethealth.models.MyTip;
 import pe.edu.upc.pethealth.network.PetHealthApiService;
@@ -45,6 +46,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ((MainActivity)getActivity()).setFragmentToolbar("Home",false,getFragmentManager());
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         myTipRecyclerView = (RecyclerView) view.findViewById(R.id.myTipRecyclerView);
         myTips = new ArrayList<>();
