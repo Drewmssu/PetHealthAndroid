@@ -61,6 +61,15 @@
         android:inputType="text"
         android:maxLines="1"
         app:layout_constraintTop_toBottomOf="@+id/birthDateEditText" />
+
+    <Spinner
+        android:id="@+id/documentTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/big_margin"
+        android:prompt="@string/prompt_document_type"
+        app:layout_constraintTop_toBottomOf="@id/genderEditText"/>
+
     <EditText
         android:id="@+id/dniEditText"
         android:layout_width="352dp"
@@ -70,7 +79,7 @@
         android:layout_margin="@dimen/big_margin"
         android:inputType="number"
         android:maxLength="8"
-        app:layout_constraintTop_toBottomOf="@+id/genderEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/documentTypeSpinner" />
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="352dp"
