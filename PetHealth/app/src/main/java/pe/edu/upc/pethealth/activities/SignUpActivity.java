@@ -10,6 +10,7 @@ import android.util.Log;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -102,20 +104,14 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        documentTypeList = new ArrayList<>();
-        documentType= DocumentType.from(getIntent().getExtras());
+        documentTypeList = new ArrayList<DocumentType>();
         tag = "PetHealth";
-
-        updateDocumentTypeList();
+        //updateDocumentTypeList();
     }
 
     private void updateDocumentTypeList(){
-        String _id = Integer.toString(documentType.getId());
 
         AndroidNetworking.get(PetHealthApiService.DOCTYPE_URL)
-                .addQueryParameter("id", _id)
-                .addQueryParameter("name", documentType.getName())
-                .addQueryParameter("shortening", documentType.getShortening())
                 .setTag(tag)
                 .setPriority(Priority.LOW)
                 .build()
@@ -129,8 +125,15 @@ public class SignUpActivity extends AppCompatActivity {
                             }
                             documentTypeList = DocumentType.from(response.getJSONArray("documentTypeList"));
 
-                            //adapter setDocumentTypes(documentTypeList);
-                            //adapter notifyDataSetChanged();
+                            ArrayList<String> shortenings = new ArrayList<String>();
+                            for (int i =0; i<documentTypeList.size();i++){
+                                shortenings.add(documentTypeList.get(i).getShortening());
+                            }
+
+                            Spinner documentTypeSpinner = (Spinner)findViewById(R.id.documentTypeSpinner);
+                            documentTypeSpinner.setAdapter(new ArrayAdapter<String>(
+                                    SignUpActivity.this, android.R.layout.simple_spinner_item, shortenings));
+
                         }catch (JSONException e){
                             e.printStackTrace();
                         }

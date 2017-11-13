@@ -73,15 +73,7 @@
         android:layout_margin="@dimen/default_margin"
         android:inputType="text"
         android:maxLines="1"
-        app:layout_constraintTop_toBottomOf="@+id/birthDateEditText" />
-
-    <Spinner
-        android:id="@+id/documentTypeSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/big_margin"
-        android:prompt="@string/prompt_document_type"
-        app:layout_constraintTop_toBottomOf="@id/birthDateEditText"/>
+        app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
 
     <EditText
         android:id="@+id/birthDateEditText"
@@ -94,6 +86,14 @@
         android:maxLines="1"
         android:focusableInTouchMode="false"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText"/>
+
+    <Spinner
+        android:id="@+id/documentTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
+        android:prompt="@string/prompt_document_type"
+        app:layout_constraintTop_toBottomOf="@id/birthDateEditText"/>
 
     <EditText
         android:id="@+id/dniEditText"
