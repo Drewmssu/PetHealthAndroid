@@ -13,7 +13,8 @@ import com.androidnetworking.widget.ANImageView;
 import java.util.List;
 
 import pe.edu.upc.pethealth.R;
-import pe.edu.upc.pethealth.activities.MyTipDetailActivity;
+import pe.edu.upc.pethealth.activities.MainActivity;
+import pe.edu.upc.pethealth.fragments.MyTipDetailFragment;
 import pe.edu.upc.pethealth.models.MyTip;
 
 /**
@@ -57,10 +58,13 @@ public class MyTipAdapters extends RecyclerView.Adapter<MyTipAdapters.ViewHolder
         holder.tipANImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = view.getContext();
-                Intent intent = new Intent(context, MyTipDetailActivity.class);
-                intent.putExtras(myTip.toBundle());
-                context.startActivity(intent);
+                MainActivity context = (MainActivity) view.getContext();
+                MyTipDetailFragment newFragment = new MyTipDetailFragment();
+                newFragment.setArguments(myTip.toBundle());
+                context.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content,newFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
     }

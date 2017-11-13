@@ -5,10 +5,12 @@ package pe.edu.upc.pethealth.network;
  */
 
 public class PetHealthApiService {
-    public static String PET_URL = "http://pethealth.azurewebsites.net";
+    public static String PET_URL = "http://pethealth.azurewebsites.net/user/pets";
     public static String TIP_URL = "http://pethealth.azurewebsites.net/tips";
     public static String LOGIN_URL = "http://pethealth.azurewebsites.net/user/login";
     public static String DOCTYPE_URL = "http://pethealth.azurewebsites.net/documentType";
     public static String SIGNUP_USER = "http://pethealth.azurewebsites.net/user/register";
     public static String SIGNUP_CUSTOMER = "http://pethealth.azurewebsites.net/user/registerCustomer";
+    public static String VETERINARY_URL = "http://pethealth.azurewebsites.net/veterinaries";
+    public static String CUSTOMER_URL = "http://pethealth.azurewebsites.net/customers";
 }

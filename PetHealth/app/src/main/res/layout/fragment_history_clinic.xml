@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pe.edu.upc.pethealth.activities.HistoryClinicActivity">
+    tools:context="pe.edu.upc.pethealth.fragments.HistoryClinicFragment">
     <TextView
         android:id="@+id/tittleHistoryTextView"
         android:layout_width="wrap_content"

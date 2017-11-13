@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import pe.edu.upc.pethealth.R;
+import pe.edu.upc.pethealth.activities.MainActivity;
 import pe.edu.upc.pethealth.adapters.NotificationAdapters;
 import pe.edu.upc.pethealth.models.Notification;
 import pe.edu.upc.pethealth.repositories.NotificationsRepository;
@@ -35,6 +36,7 @@ public class NotificationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ((MainActivity)getActivity()).setFragmentToolbar("Notifications",false,getFragmentManager());
         View view = inflater.inflate(R.layout.fragment_notifications, container, false);
         notificationsRecyclerView = (RecyclerView) view.findViewById(R.id.notificationRecyclerView);
         notificationAdapters = new NotificationAdapters(NotificationsRepository.getNotifications());

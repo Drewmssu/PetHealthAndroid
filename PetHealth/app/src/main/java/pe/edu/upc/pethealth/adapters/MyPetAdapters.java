@@ -10,11 +10,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.androidnetworking.widget.ANImageView;
+
 import java.util.List;
 
 import pe.edu.upc.pethealth.R;
-import pe.edu.upc.pethealth.activities.HistoryClinicActivity;
-import pe.edu.upc.pethealth.activities.MyPetDescriptionActivity;
+import pe.edu.upc.pethealth.fragments.HistoryClinicFragment;
+import pe.edu.upc.pethealth.activities.MainActivity;
+import pe.edu.upc.pethealth.fragments.MyPetDescriptionFragment;
 import pe.edu.upc.pethealth.models.MyPet;
 
 /**
@@ -39,22 +42,32 @@ public class MyPetAdapters extends RecyclerView.Adapter<MyPetAdapters.ViewHolder
         final MyPet myPet = myPets.get(position);
         holder.petNameTextView.setText(myPets.get(position).getName());
         holder.petDescriptionTextView.setText(myPets.get(position).getDescription());
-        holder.petImageView.setImageResource(myPets.get(position).getImage());
+        holder.petANImageView.setImageUrl(myPets.get(position).getImage());
+        holder.petANImageView.setDefaultImageResId(R.mipmap.ic_launcher);
+        holder.petANImageView.setErrorImageResId(R.mipmap.ic_launcher);
         holder.moreTextView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Context context = view.getContext();
-                Intent intent = new Intent(context, MyPetDescriptionActivity.class);
-                intent.putExtras(myPet.toBundle());
-                context.startActivity(intent);
+                MainActivity context = (MainActivity) view.getContext();
+                MyPetDescriptionFragment newFragment = new MyPetDescriptionFragment();
+                newFragment.setArguments(myPet.toBundle());
+                context.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content, newFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
         holder.clinicHystoryImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = view.getContext();
-                Intent intent = new Intent(context, HistoryClinicActivity.class);
-                context.startActivity(intent);
+                MainActivity context = (MainActivity) view.getContext();
+                HistoryClinicFragment newFragment = new HistoryClinicFragment();
+                //TODO add the bundle of HistoryClinic
+                //newFragment.setArguments(myHistoryClinic.toBundle());
+                context.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content, newFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
@@ -76,7 +89,7 @@ public class MyPetAdapters extends RecyclerView.Adapter<MyPetAdapters.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView petNameTextView;
-        ImageView petImageView;
+        ANImageView petANImageView;
         TextView petDescriptionTextView;
         TextView moreTextView;
         ImageButton clinicHystoryImageButton;
@@ -84,7 +97,7 @@ public class MyPetAdapters extends RecyclerView.Adapter<MyPetAdapters.ViewHolder
         public ViewHolder(View itemView) {
             super(itemView);
             petNameTextView = (TextView) itemView.findViewById(R.id.petNameTextView);
-            petImageView = (ImageView) itemView.findViewById(R.id.myPetImageView);
+            petANImageView = (ANImageView) itemView.findViewById(R.id.myPetImageView);
             petDescriptionTextView = (TextView) itemView.findViewById(R.id.myPetDescriptionTextView);
             moreTextView = (TextView) itemView.findViewById(R.id.moreTextView);
             clinicHystoryImageButton = (ImageButton) itemView.findViewById(R.id.historyClinicImageButton);

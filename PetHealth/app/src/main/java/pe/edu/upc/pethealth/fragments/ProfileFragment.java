@@ -9,10 +9,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.androidnetworking.widget.ANImageView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
 import pe.edu.upc.pethealth.R;
+import pe.edu.upc.pethealth.activities.MainActivity;
 import pe.edu.upc.pethealth.models.Person;
+import pe.edu.upc.pethealth.network.PetHealthApiService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,35 +51,67 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ((MainActivity)getActivity()).setFragmentToolbar("Profile",true,getFragmentManager());
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-      //  person = new Person(1,R.mipmap.ic_launcher_round,"Jesus","Cueto","76219104","juanjesus@gmail.com","966991826","Av.Salaveryy 2526");
+        person = new Person();
+        Bundle b = getArguments();
         tittleTextView = (TextView) view.findViewById(R.id.tittleTextView);
         photoANImageView = (ANImageView) view.findViewById(R.id.photoANImageView);
-        nameTextView = (TextView) view.findViewById(R.id.nameTextView);
-        lastNameTextView = (TextView) view.findViewById(R.id.lastNameTextView);
-        dniTextView = (TextView) view.findViewById(R.id.dniTextView);
-        mailTextView = (TextView) view.findViewById(R.id.mailTextView);
-        phoneTextView =(TextView) view.findViewById(R.id.phoneTextView);
-        addressTextView = (TextView) view.findViewById(R.id.addressTextView);
+        nameTextView = (TextView) view.findViewById(R.id.nameDataTextView);
+        lastNameTextView = (TextView) view.findViewById(R.id.lastNameDataTextView);
+        dniTextView = (TextView) view.findViewById(R.id.dniDataTextView);
+        mailTextView = (TextView) view.findViewById(R.id.mailDataTextView);
+        phoneTextView =(TextView) view.findViewById(R.id.phoneDataTextView);
+        addressTextView = (TextView) view.findViewById(R.id.addressDataTextView);
         editButton = (Button) view.findViewById(R.id.editValuesButton);
-
-        photoANImageView.setDefaultImageResId(R.mipmap.ic_launcher_round);
-        photoANImageView.setErrorImageResId(R.mipmap.ic_launcher_round);
-        photoANImageView.setImageUrl("https://www.facebook.com/photo.php?fbid=540765639424050&set=a.204856629681621.1073741825.100004718550830&type=3&theater");
-        nameTextView.setText(person.getName());
-        lastNameTextView.setText(person.getLastName());
-        dniTextView.setText(person.getDni());
-        mailTextView.setText(person.getMail());
-        phoneTextView.setText(person.getPhone());
-        addressTextView.setText(person.getAddress());
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
+        updateProfile(b);
         return view;
+    }
+
+    private void updateProfile(final Bundle bundle){
+        AndroidNetworking.get(PetHealthApiService.CUSTOMER_URL)
+                .addQueryParameter("customerId",String.valueOf(bundle.getInt("user_id")))
+                .setTag(getString(R.string.app_name))
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject res = response.getJSONArray("res").getJSONObject(0);
+                            person = new Person(res.getInt("id"),
+                                    res.getString("name"),
+                                    res.getString("lastname"),
+                                    res.getString("nrodocumento"),
+                                    res.getString("phone"),
+                                    res.getString("address")
+                            );
+                            photoANImageView.setDefaultImageResId(R.mipmap.ic_launcher_round);
+                            photoANImageView.setErrorImageResId(R.mipmap.ic_launcher_round);
+                            photoANImageView.setImageUrl("http://jbblog.flopro.taco-hvac.com/wp-content/uploads/2014/05/smart-person.jpg");//TODO change for profile image url
+                            nameTextView.setText(person.getName());
+                            lastNameTextView.setText(person.getLastName());
+                            dniTextView.setText(person.getDni());
+                            mailTextView.setText(bundle.getString("mail"));
+                            phoneTextView.setText(person.getPhone());
+                            addressTextView.setText(person.getAddress());
+                            editButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                }
+                            });
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
+
     }
 
 }

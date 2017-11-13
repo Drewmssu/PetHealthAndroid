@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryLight"
-    tools:context="pe.edu.upc.pethealth.activities.MyPetDescriptionActivity">
+    tools:context="pe.edu.upc.pethealth.fragments.MyPetDescriptionFragment">
 
     <TextView
         android:id="@+id/petNameTextView"
@@ -19,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-    <ImageView
+    <com.androidnetworking.widget.ANImageView
         android:id="@+id/myPetImageView"
         android:layout_width="240dp"
         android:layout_height="240dp"
