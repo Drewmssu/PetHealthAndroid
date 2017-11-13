@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -24,7 +23,6 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -106,7 +104,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         documentTypeList = new ArrayList<DocumentType>();
         tag = "PetHealth";
-        //updateDocumentTypeList();
+        updateDocumentTypeList();
     }
 
     private void updateDocumentTypeList(){
@@ -123,7 +121,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 Log.d(tag,response.getString("message"));
                                 return;
                             }
-                            documentTypeList = DocumentType.from(response.getJSONArray("documentTypeList"));
+                            documentTypeList = DocumentType.from(response.getJSONArray("documents"));
 
                             ArrayList<String> shortenings = new ArrayList<String>();
                             for (int i =0; i<documentTypeList.size();i++){
@@ -146,7 +144,7 @@ public class SignUpActivity extends AppCompatActivity {
                 });
     }
 
-    private void attempPerson(JSONObject person){
+    private void attemptPerson(JSONObject person){
         final Context context = this;
         AndroidNetworking.post(PetHealthApiService.SIGNUP_CUSTOMER)
                 .addJSONObjectBody(person)
@@ -234,7 +232,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         person.put("adress",address);
                                         person.put("birthdate", format.parse(birthDate));
                                         person.put("phone","966991826");
-                                        attempPerson(person);
+                                        attemptPerson(person);
                                     }catch (JSONException e){
                                         e.printStackTrace();
                                     } catch (ParseException e) {

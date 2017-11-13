@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,8 +22,6 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Calendar;
 
 import pe.edu.upc.pethealth.R;
 import pe.edu.upc.pethealth.models.User;
@@ -47,7 +44,7 @@ public class StartActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         user = new User();
         logoImageView = (ImageView) findViewById(R.id.logoImageView);
-        userEditText = (EditText) findViewById(R.id.emailEditText);
+        userEditText = (EditText) findViewById(R.id.usernameEditText);
         passwordTextInputEditText = (TextInputEditText) findViewById(R.id.passwordTextInputEditText);
         signInButton = (Button) findViewById(R.id.signInButton);
         signInButton.setOnClickListener(new View.OnClickListener() {
