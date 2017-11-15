@@ -21,7 +21,6 @@ import pe.edu.upc.pethealth.activities.MainActivity;
 import pe.edu.upc.pethealth.models.Veterinary;
 
 public class AboutVeterinaryFragment extends Fragment implements OnMapReadyCallback {
-
     private GoogleMap mMap;
     TextView nameTextView;
     RatingBar rateRatingBar;
@@ -34,9 +33,9 @@ public class AboutVeterinaryFragment extends Fragment implements OnMapReadyCallb
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
+        setRetainInstance(true);
         mapFragment.getMapAsync(this);
         ((MainActivity)getActivity()).setFragmentToolbar("Veterinaries",true,getFragmentManager());
-        /*Do the bundle thing to recover the data that is passed*/
         veterinary = Veterinary.from(getArguments());
         nameTextView = (TextView)view.findViewById(R.id.nameTextView);
         rateRatingBar = (RatingBar)view.findViewById(R.id.veterinaryRatingBar);
@@ -60,8 +59,6 @@ public class AboutVeterinaryFragment extends Fragment implements OnMapReadyCallb
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
         //LatLng sydney = new LatLng(-34, 151);
         LatLng vetpos = new LatLng(lat,lng);
         mMap.addMarker(new MarkerOptions().position(vetpos).title("Marker in Sydney"));

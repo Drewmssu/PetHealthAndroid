@@ -67,4 +67,6 @@
         android:text="@string/login_sign_up_text"
         android:textColor="@color/colorSecondaryText"/>
 
+
+
 </android.support.constraint.ConstraintLayout>

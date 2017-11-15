@@ -1,6 +1,5 @@
 package pe.edu.upc.pethealth.fragments;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,7 +31,6 @@ import pe.edu.upc.pethealth.repositories.VeterinariesRepository;
  * A simple {@link Fragment} subclass.
  */
 public class SearchFragment extends Fragment {
-
     private RecyclerView searchRecyclerView;
     private SearchAdapters searchAdapters;
     private RecyclerView.LayoutManager searchLayoutManager;
@@ -81,5 +79,4 @@ public class SearchFragment extends Fragment {
                     }
                 });
     }
-
 }

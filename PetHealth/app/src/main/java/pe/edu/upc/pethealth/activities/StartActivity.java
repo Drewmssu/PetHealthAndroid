@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,10 +23,9 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Calendar;
-
 import pe.edu.upc.pethealth.R;
 import pe.edu.upc.pethealth.models.User;
+import pe.edu.upc.pethealth.network.Connection;
 import pe.edu.upc.pethealth.network.PetHealthApiService;
 
 public class StartActivity extends AppCompatActivity {
@@ -45,7 +43,6 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
-        user = new User();
         logoImageView = (ImageView) findViewById(R.id.logoImageView);
         userEditText = (EditText) findViewById(R.id.emailEditText);
         passwordTextInputEditText = (TextInputEditText) findViewById(R.id.passwordTextInputEditText);
@@ -70,7 +67,6 @@ public class StartActivity extends AppCompatActivity {
 
     private void attemptLogin() {
 
-
         // Reset errors.
         userEditText.setError(null);
         passwordTextInputEditText.setError(null);
@@ -94,6 +90,10 @@ public class StartActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(email)) {
             userEditText.setError(getString(R.string.error_field_required));
             focusView = userEditText;
+            cancel = true;
+        }
+
+        if(!Connection.isOnline(getApplicationContext())){
             cancel = true;
         }
 
