@@ -84,11 +84,11 @@ public class DocumentType {
     }
 
     public static DocumentType from(Bundle bundle){
-        DocumentType docType = new DocumentType();
+        DocumentType documentType = new DocumentType();
 
-        docType.setId(bundle.getInt("id"))
+        documentType.setId(bundle.getInt("id"))
                 .setName(bundle.getString("name"))
                 .setShortening(bundle.getString("shortening"));
-        return docType;
+        return documentType;
     }
 }

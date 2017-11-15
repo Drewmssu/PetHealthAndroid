@@ -5,11 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -102,20 +102,14 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        documentTypeList = new ArrayList<>();
-        documentType= DocumentType.from(getIntent().getExtras());
+        documentTypeList = new ArrayList<DocumentType>();
         tag = "PetHealth";
-
         updateDocumentTypeList();
     }
 
     private void updateDocumentTypeList(){
-        String _id = Integer.toString(documentType.getId());
 
         AndroidNetworking.get(PetHealthApiService.DOCTYPE_URL)
-                .addQueryParameter("id", _id)
-                .addQueryParameter("name", documentType.getName())
-                .addQueryParameter("shortening", documentType.getShortening())
                 .setTag(tag)
                 .setPriority(Priority.LOW)
                 .build()
@@ -127,10 +121,17 @@ public class SignUpActivity extends AppCompatActivity {
                                 Log.d(tag,response.getString("message"));
                                 return;
                             }
-                            documentTypeList = DocumentType.from(response.getJSONArray("documentTypeList"));
+                            documentTypeList = DocumentType.from(response.getJSONArray("documents"));
 
-                            //adapter setDocumentTypes(documentTypeList);
-                            //adapter notifyDataSetChanged();
+                            ArrayList<String> shortenings = new ArrayList<String>();
+                            for (int i =0; i<documentTypeList.size();i++){
+                                shortenings.add(documentTypeList.get(i).getShortening());
+                            }
+
+                            Spinner documentTypeSpinner = (Spinner)findViewById(R.id.documentTypeSpinner);
+                            documentTypeSpinner.setAdapter(new ArrayAdapter<String>(
+                                    SignUpActivity.this, android.R.layout.simple_spinner_item, shortenings));
+
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -143,7 +144,7 @@ public class SignUpActivity extends AppCompatActivity {
                 });
     }
 
-    private void attempPerson(JSONObject person){
+    private void attemptPerson(JSONObject person){
         final Context context = this;
         AndroidNetworking.post(PetHealthApiService.SIGNUP_CUSTOMER)
                 .addJSONObjectBody(person)
@@ -231,7 +232,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         person.put("adress",address);
                                         person.put("birthdate", format.parse(birthDate));
                                         person.put("phone","966991826");
-                                        attempPerson(person);
+                                        attemptPerson(person);
                                     }catch (JSONException e){
                                         e.printStackTrace();
                                     } catch (ParseException e) {

@@ -44,7 +44,7 @@ public class StartActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         logoImageView = (ImageView) findViewById(R.id.logoImageView);
-        userEditText = (EditText) findViewById(R.id.emailEditText);
+        userEditText = (EditText) findViewById(R.id.usernameEditText);
         passwordTextInputEditText = (TextInputEditText) findViewById(R.id.passwordTextInputEditText);
         signInButton = (Button) findViewById(R.id.signInButton);
         signInButton.setOnClickListener(new View.OnClickListener() {
