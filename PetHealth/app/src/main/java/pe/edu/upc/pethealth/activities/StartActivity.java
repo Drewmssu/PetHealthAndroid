@@ -95,6 +95,7 @@ public class StartActivity extends AppCompatActivity {
 
         if(!Connection.isOnline(getApplicationContext())){
             cancel = true;
+            return;
         }
 
         if (cancel) {
