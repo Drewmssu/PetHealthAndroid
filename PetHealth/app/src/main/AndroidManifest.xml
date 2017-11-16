@@ -59,7 +59,8 @@
             android:name=".fragments.AboutVeterinaryFragment"
             android:label="@string/title_activity_about_veterinary"></fragment
         -->
-        <activity android:name=".activities.AddPetActivity" />
+        <activity android:name=".activities.AddPetActivity"
+            android:parentActivityName=".activities.MainActivity"/>
         <activity android:name=".activities.AddTipActivity"></activity>
     </application>
 

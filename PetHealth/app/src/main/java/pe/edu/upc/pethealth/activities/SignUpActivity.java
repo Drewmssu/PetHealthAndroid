@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -61,6 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sing_up);
         documentTypeSpinner = (Spinner) findViewById(R.id.documentTypeSpinner);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        myToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
         setSupportActionBar(myToolbar);
         nameEditText =(EditText) findViewById(R.id.nameEditText);
         lastNameEditText=(EditText) findViewById(R.id.lastNameEditText);
@@ -107,6 +109,16 @@ public class SignUpActivity extends AppCompatActivity {
         updateDocumentTypeList();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return  true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     private void updateDocumentTypeList(){
 
         AndroidNetworking.get(PetHealthApiService.DOCTYPE_URL)
@@ -125,7 +137,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                             ArrayList<String> shortenings = new ArrayList<String>();
                             for (int i =0; i<documentTypeList.size();i++){
-                                shortenings.add(documentTypeList.get(i).getShortening());
+                             //   shortenings.add(documentTypeList.get(i).getShortening());
                             }
 
                             Spinner documentTypeSpinner = (Spinner)findViewById(R.id.documentTypeSpinner);

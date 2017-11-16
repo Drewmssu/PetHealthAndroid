@@ -5,11 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryLight"
     tools:context="pe.edu.upc.pethealth.fragments.MyPetDescriptionFragment">
 
     <TextView
-        android:id="@+id/petNameTextView"
+        android:id="@+id/petTittleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My Pet"
@@ -36,7 +35,7 @@
         android:text="Race"
         android:textColor="@color/colorSecondaryText"
         android:textAppearance="?android:textAppearanceMedium"
-        app:layout_constraintTop_toBottomOf="@id/petNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/petTittleTextView"
         app:layout_constraintStart_toEndOf="@id/myPetImageView"/>
     <TextView
         android:id="@+id/petAgeTextView"

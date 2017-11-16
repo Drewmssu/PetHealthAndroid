@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <EditText
-        android:id="@+id/petNameTextView"
+        android:id="@+id/petTittleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Pet Name"
@@ -61,7 +61,7 @@
         android:layout_marginEnd="@dimen/default_margin"
         android:layout_marginStart="@dimen/default_margin"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/petNameTextView"/>
+        app:layout_constraintTop_toBottomOf="@id/petTittleTextView"/>
 
     <EditText
         android:id="@+id/birthDateEditText"

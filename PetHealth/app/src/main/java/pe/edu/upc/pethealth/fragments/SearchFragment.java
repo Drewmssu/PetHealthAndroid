@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,6 @@ import pe.edu.upc.pethealth.activities.MainActivity;
 import pe.edu.upc.pethealth.adapters.SearchAdapters;
 import pe.edu.upc.pethealth.models.Veterinary;
 import pe.edu.upc.pethealth.network.PetHealthApiService;
-import pe.edu.upc.pethealth.repositories.VeterinariesRepository;
 
 /**
  * A simple {@link Fragment} subclass.

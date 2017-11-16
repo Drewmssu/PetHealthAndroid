@@ -4,12 +4,13 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.provider.Settings;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -46,6 +47,7 @@ public class AddPetActivity extends AppCompatActivity {
     int yy= calendar.get(Calendar.YEAR);
     int mm = calendar.get(Calendar.MONTH);
     int dd = calendar.get(Calendar.DAY_OF_MONTH);
+    final Context context = this;
 
 
     @Override
@@ -54,9 +56,9 @@ public class AddPetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_pet);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_petToolbar);
         setSupportActionBar(myToolbar);
+        myToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
         user = User.from(getIntent().getExtras());
-       // getActionBar().setDisplayHomeAsUpEnabled(true);
-        nameEditText = (EditText) findViewById(R.id.petNameTextView);
+        nameEditText = (EditText) findViewById(R.id.petTittleTextView);
         raceEditText = (EditText) findViewById(R.id.petRaceEditText);
         descriptionEditText = (EditText) findViewById(R.id.petDescriptionEditText);
         addButton = (Button) findViewById(R.id.addPetButton); 
@@ -94,9 +96,15 @@ public class AddPetActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp(){
-        finish();
-        return true;
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent);
+                return  true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void attempToAddPet() {
@@ -170,7 +178,8 @@ public class AddPetActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             dialogInterface.cancel();
-                                            finish();
+                                            Intent intent = new Intent(context, MainActivity.class);
+                                            context.startActivity(intent);
                                         }
                                     });
                                     AlertDialog alertDialog = builder.create();

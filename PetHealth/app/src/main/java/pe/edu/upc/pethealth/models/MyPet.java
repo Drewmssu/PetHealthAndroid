@@ -20,23 +20,30 @@ public class MyPet {
     private String birthDate;
     private String description;
     private String image;
-
-
-
+    private String animalType;
 
     public MyPet() {
 
     }
 
-    public MyPet(int id, String name, String race, String birthDate, String description, String image) {
+    public MyPet(int id, String name, String race, String birthDate, String description, String image, String animalType) {
         this.id = id;
         this.name = name;
         this.race = race;
         this.birthDate = birthDate;
         this.description = description;
         this.image = image;
+        this.animalType = animalType;
     }
 
+    public String getAnimalType() {
+        return animalType;
+    }
+
+    public MyPet setAnimalType(String animalType) {
+        this.animalType = animalType;
+        return this;
+    }
 
     public int getId(){
         return id;
@@ -100,6 +107,7 @@ public class MyPet {
         bundle.putString("birthDate", birthDate);
         bundle.putString("description",description);
         bundle.putString("image",image);
+        bundle.putString("animalType",animalType);
         return bundle;
     }
 
@@ -110,7 +118,8 @@ public class MyPet {
                 .setRace(bundle.getString("race"))
                 .setBirthDate(bundle.getString("birthDate"))
                 .setDescription(bundle.getString("description"))
-                .setImage(bundle.getString("image"));
+                .setImage(bundle.getString("image"))
+                .setAnimalType(bundle.getString("animalType"));
         return myPet;
     }
 
@@ -122,7 +131,8 @@ public class MyPet {
                     .setRace(json.getString("race"))
                     .setBirthDate(json.getString("birthDate"))//TODO fix birthDate
                     .setDescription(json.getString("description"))
-                    .setImage(json.getString("photo"));
+                    .setImage(json.getString("photo"))
+                    .setAnimalType(json.getString("animalTypeName"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

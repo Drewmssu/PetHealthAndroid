@@ -20,7 +20,7 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
-            android:id="@+id/petNameTextView"
+            android:id="@+id/petTittleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -40,7 +40,7 @@
             android:layout_margin="@dimen/big_margin"
             android:textColor="@color/colorSecondaryText"
             android:textAppearance="?android:textAppearanceSmall"
-            app:layout_constraintTop_toBottomOf="@id/petNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/petTittleTextView"
             app:layout_constraintStart_toEndOf="@id/myPetImageView"
             app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -50,8 +50,8 @@
             android:layout_height="14dp"
             android:layout_margin="@dimen/default_margin"
             app:srcCompat="@drawable/ic_assignment_black_24dp"
-            app:layout_constraintStart_toEndOf="@id/petNameTextView"
-            app:layout_constraintBottom_toBottomOf="@id/petNameTextView" />
+            app:layout_constraintStart_toEndOf="@id/petTittleTextView"
+            app:layout_constraintBottom_toBottomOf="@id/petTittleTextView" />
 
         <TextView
             android:id="@+id/moreTextView"

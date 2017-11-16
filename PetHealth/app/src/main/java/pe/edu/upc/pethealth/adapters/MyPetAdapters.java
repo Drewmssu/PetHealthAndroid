@@ -1,7 +1,5 @@
 package pe.edu.upc.pethealth.adapters;
 
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +13,6 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.BitmapRequestListener;
-import com.androidnetworking.widget.ANImageView;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.List;
@@ -125,7 +122,7 @@ public class MyPetAdapters extends RecyclerView.Adapter<MyPetAdapters.ViewHolder
 
         public ViewHolder(View itemView) {
             super(itemView);
-            petNameTextView = (TextView) itemView.findViewById(R.id.petNameTextView);
+            petNameTextView = (TextView) itemView.findViewById(R.id.petTittleTextView);
             petANImageView = (ImageView) itemView.findViewById(R.id.myPetImageView);
             petDescriptionTextView = (TextView) itemView.findViewById(R.id.myPetDescriptionTextView);
             moreTextView = (TextView) itemView.findViewById(R.id.moreTextView);
