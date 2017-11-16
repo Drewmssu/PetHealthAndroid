@@ -46,12 +46,13 @@ public class SearchAdapters extends RecyclerView.Adapter<SearchAdapters.ViewHold
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_search,parent,false));
     }
 
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Veterinary veterinary = veterinaries.get(position);
         holder.vetANImageView.setDefaultImageResId(R.mipmap.ic_launcher_round);
         holder.vetANImageView.setErrorImageResId(R.mipmap.ic_launcher);
-        holder.vetANImageView.setImageUrl(veterinary.getPreVideo());
+        holder.vetANImageView.setImageUrl("https://img.youtube.com/vi/"+veterinary.getPreVideo()+"/0.jpg");
         holder.nameTextView.setText(veterinary.getName());
         holder.startsRatingBar.setRating(3);
         holder.locationTextView.setText("Jesus Maria");
@@ -84,7 +85,7 @@ public class SearchAdapters extends RecyclerView.Adapter<SearchAdapters.ViewHold
         ImageButton forwardImageutton;
         public ViewHolder(View itemView) {
             super(itemView);
-            vetANImageView = (ANImageView) itemView.findViewById(R.id.vetANImageView);
+                               vetANImageView = (ANImageView) itemView.findViewById(R.id.vetANImageView);
             nameTextView = (TextView) itemView.findViewById(R.id.nameTextView);
             startsRatingBar = (RatingBar) itemView.findViewById(R.id.rateRatingBar);
             locationTextView = (TextView) itemView.findViewById(R.id.locationTextView);

@@ -1,6 +1,8 @@
 package pe.edu.upc.pethealth.activities;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -13,15 +15,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import pe.edu.upc.pethealth.R;
 import pe.edu.upc.pethealth.fragments.ChatsFragment;
 import pe.edu.upc.pethealth.fragments.HomeFragment;
 import pe.edu.upc.pethealth.fragments.MyPetsFragment;
+import pe.edu.upc.pethealth.fragments.NoInternetFragment;
 import pe.edu.upc.pethealth.fragments.NotificationsFragment;
 import pe.edu.upc.pethealth.fragments.ProfileFragment;
 import pe.edu.upc.pethealth.fragments.SearchFragment;
 import pe.edu.upc.pethealth.models.User;
+import pe.edu.upc.pethealth.network.Connection;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,9 +37,14 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            return navigateAccordingTo(item.getItemId());
+            if(Connection.isOnline(getApplicationContext()))
+                return navigateAccordingTo(item.getItemId());
+            else{
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content,new NoInternetFragment()).commit();
+                return true;
+            }
         }
-
     };
 
     @Override
@@ -58,25 +68,24 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-
-        switch (item.getItemId()){
-            case R.id.navigation_logout:
-                finish();
-                System.exit(0);
-                return true;
-            case R.id.navigation_profile:
-                ProfileFragment newfragment = new ProfileFragment();
-                newfragment.setArguments(u.toBundle());
-                getSupportFragmentManager().beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.content, newfragment).commit();
-                return true;
-            case R.id.navigation_search:
-                getSupportFragmentManager().beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.content, new SearchFragment()).commit();
-                return true;
-        }
+            switch (item.getItemId()){
+                case R.id.navigation_logout:
+                    finish();
+                    System.exit(0);
+                    return true;
+                case R.id.navigation_profile:
+                    ProfileFragment newfragment = new ProfileFragment();
+                    newfragment.setArguments(u.toBundle());
+                    getSupportFragmentManager().beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.content, newfragment).commit();
+                    return true;
+                case R.id.navigation_search:
+                    getSupportFragmentManager().beginTransaction()
+                            .addToBackStack(null)
+                            .replace(R.id.content, new SearchFragment()).commit();
+                    return true;
+            }
         return super.onOptionsItemSelected(item);
     }
 
@@ -119,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     fragmentManager.popBackStack();
-
                 }
             });
         }else{
