@@ -98,7 +98,10 @@ public class MainActivity extends AppCompatActivity {
     private Fragment getFragmentFor(int id){
         switch (id){
             case R.id.navigation_home: return new HomeFragment();
-            case R.id.navigation_mypets: return new MyPetsFragment();
+            case R.id.navigation_mypets:
+                MyPetsFragment newFragment = new MyPetsFragment();
+                newFragment.setArguments(u.toBundle());
+                return newFragment;
             case R.id.navigation_chat: return new ChatsFragment();
             case R.id.navigation_notifications: return new NotificationsFragment();
         }

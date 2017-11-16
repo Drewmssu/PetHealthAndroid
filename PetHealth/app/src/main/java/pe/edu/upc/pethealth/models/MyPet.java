@@ -17,7 +17,7 @@ public class MyPet {
     private int id;
     private String name;
     private String race;
-    private String age;
+    private String birthDate;
     private String description;
     private String image;
 
@@ -28,11 +28,11 @@ public class MyPet {
 
     }
 
-    public MyPet(int id, String name, String race, String age, String description, String image) {
+    public MyPet(int id, String name, String race, String birthDate, String description, String image) {
         this.id = id;
         this.name = name;
         this.race = race;
-        this.age = age;
+        this.birthDate = birthDate;
         this.description = description;
         this.image = image;
     }
@@ -83,12 +83,12 @@ public class MyPet {
         return this;
     }
 
-    public String getAge() {
-        return age;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    public MyPet setAge(String age) {
-        this.age = age;
+    public MyPet setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
         return this;
     }
 
@@ -97,7 +97,7 @@ public class MyPet {
         bundle.putInt("id",id);
         bundle.putString("name",name);
         bundle.putString("race",race);
-        bundle.putString("age",age);
+        bundle.putString("birthDate", birthDate);
         bundle.putString("description",description);
         bundle.putString("image",image);
         return bundle;
@@ -108,7 +108,7 @@ public class MyPet {
         myPet.setId(bundle.getInt("id"))
                 .setName(bundle.getString("name"))
                 .setRace(bundle.getString("race"))
-                .setAge(bundle.getString("age"))
+                .setBirthDate(bundle.getString("birthDate"))
                 .setDescription(bundle.getString("description"))
                 .setImage(bundle.getString("image"));
         return myPet;
@@ -120,7 +120,7 @@ public class MyPet {
             myPet.setId(json.getInt("petId"))
                     .setName(json.getString("name"))
                     .setRace(json.getString("race"))
-                    .setAge(json.getString("birthDate"))//TODO fix age
+                    .setBirthDate(json.getString("birthDate"))//TODO fix birthDate
                     .setDescription(json.getString("description"))
                     .setImage(json.getString("photo"));
         } catch (JSONException e) {

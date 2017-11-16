@@ -21,25 +21,26 @@
         <activity
             android:name=".activities.StartActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--fragment android:name=".fragments.MyPetDescriptionFragment" /-->
-        <!--fragment android:name=".fragments.HistoryClinicFragment" /-->
+        <!-- fragment android:name=".fragments.MyPetDescriptionFragment" / -->
+        <!-- fragment android:name=".fragments.HistoryClinicFragment" / -->
         <activity
             android:name=".activities.MainActivity"
             android:configChanges="screenSize|orientation|screenLayout"
             android:label="@string/app_name"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.SignUpActivity"
+        <activity
+            android:name=".activities.SignUpActivity"
             android:screenOrientation="portrait" />
-        <!--fragment android:name=".fragments.MyTipDetailFragment" /-->
+        <!-- fragment android:name=".fragments.MyTipDetailFragment" / -->
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -52,9 +53,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <!---fragment
+        <!--
+            -fragment
             android:name=".fragments.AboutVeterinaryFragment"
-            android:label="@string/title_activity_about_veterinary"></fragment-->
+            android:label="@string/title_activity_about_veterinary"></fragment
+        -->
+        <activity android:name=".activities.AddPetActivity" />
+        <activity android:name=".activities.AddTipActivity"></activity>
     </application>
 
 </manifest>

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v4.app.Fragment;
 
@@ -34,12 +33,12 @@ public class MyPetDescriptionFragment extends Fragment {
         myPetImageView  =(ANImageView) view.findViewById(R.id.myPetImageView);
         raceTextView = (TextView) view.findViewById(R.id.petRaceTextView);
         ageTextView= (TextView) view.findViewById(R.id.petAgeTextView);
-        descriptionTextView = (TextView) view.findViewById(R.id.petDescriptionTextView);
+        descriptionTextView = (TextView) view.findViewById(R.id.petDescriptionEditText);
 
         nameTextView.setText(myPet.getName());
         myPetImageView.setImageUrl(myPet.getImage());
         raceTextView.setText(myPet.getRace());
-        ageTextView.setText((myPet.getAge()));
+        ageTextView.setText((myPet.getBirthDate()));
         descriptionTextView.setText(myPet.getDescription());
         return view;
     }

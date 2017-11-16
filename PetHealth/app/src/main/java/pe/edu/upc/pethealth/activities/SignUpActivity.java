@@ -148,6 +148,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void attempPerson(JSONObject person){
         final Context context = this;
+        System.out.println(person);
         AndroidNetworking.post(PetHealthApiService.SIGNUP_CUSTOMER)
                 .addJSONObjectBody(person)
                 .setTag(getString(R.string.app_name))

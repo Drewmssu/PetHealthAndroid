@@ -13,4 +13,5 @@ public class PetHealthApiService {
     public static String SIGNUP_CUSTOMER = "http://pethealth.azurewebsites.net/user/registerCustomer";
     public static String VETERINARY_URL = "http://pethealth.azurewebsites.net/veterinaries";
     public static String CUSTOMER_URL = "http://pethealth.azurewebsites.net/customers";
+    public static String ADD_PET_URL = "http://pethealth.azurewebsites.net/pet/add";
 }
