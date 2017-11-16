@@ -54,7 +54,7 @@ public class DocumentType {
         try{
             documentType.setId(jsonDocumentType.getInt("id"))
                     .setName(jsonDocumentType.getString("name"))
-                    .setShortening(jsonDocumentType.getString("shortening"));
+                    .setShortening(jsonDocumentType.getString("abreviation"));
             return documentType;
         }catch (JSONException e ){
             e.printStackTrace();

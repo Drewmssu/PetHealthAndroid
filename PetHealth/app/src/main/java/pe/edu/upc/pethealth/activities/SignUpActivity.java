@@ -3,6 +3,7 @@ package pe.edu.upc.pethealth.activities;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,10 +47,11 @@ public class SignUpActivity extends AppCompatActivity {
     EditText nameEditText;
     EditText lastNameEditText;
     EditText usernameEditText;
-    EditText passwordEditText;
+    TextInputEditText passwordEditText;
     EditText addressEditText;
     EditText dniEditText;
     EditText emailEditText;
+    EditText phoneEditText;
 
     //Crea el calendario para la vista con la fecha de hoy
     Calendar calendar = Calendar.getInstance();
@@ -67,11 +69,12 @@ public class SignUpActivity extends AppCompatActivity {
         nameEditText =(EditText) findViewById(R.id.nameEditText);
         lastNameEditText=(EditText) findViewById(R.id.lastNameEditText);
         usernameEditText =(EditText) findViewById(R.id.usernameEditText);
-        passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+        passwordEditText = (TextInputEditText) findViewById(R.id.passwordTextInputEditText);
         addressEditText = (EditText) findViewById(R.id.addressTextInputEditText);
         dniEditText = (EditText) findViewById(R.id.dniEditText);
         emailEditText =(EditText) findViewById(R.id.emailEditText);
         birthDateEditText = (EditText) findViewById(R.id.birthDateEditText);
+        phoneEditText = (EditText) findViewById(R.id.phoneEditText);
         birthDateEditText.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -137,7 +140,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                             ArrayList<String> shortenings = new ArrayList<String>();
                             for (int i =0; i<documentTypeList.size();i++){
-                             //   shortenings.add(documentTypeList.get(i).getShortening());
+                                shortenings.add(documentTypeList.get(i).getShortening());
                             }
 
                             Spinner documentTypeSpinner = (Spinner)findViewById(R.id.documentTypeSpinner);
@@ -158,7 +161,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void attemptPerson(JSONObject person){
         final Context context = this;
-        System.out.println(person);
         AndroidNetworking.post(PetHealthApiService.SIGNUP_CUSTOMER)
                 .addJSONObjectBody(person)
                 .setTag(getString(R.string.app_name))
@@ -205,7 +207,9 @@ public class SignUpActivity extends AppCompatActivity {
         final String dni = dniEditText.getText().toString();
         final String birthDate = birthDateEditText.getText().toString();
         String email = emailEditText.getText().toString();
+        final String phone = phoneEditText.getText().toString();
         final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        final Integer documentTypeId = documentTypeSpinner.getSelectedItemPosition()+1;
         View focusView = null;
         Boolean cancel = false;
 
@@ -241,10 +245,10 @@ public class SignUpActivity extends AppCompatActivity {
                                         person.put("name", name);
                                         person.put("lastName",lastName);
                                         person.put("nrodocumento",dni);
-                                        person.put("tipodocumento",1);
+                                        person.put("tipodocumento", documentTypeId);
                                         person.put("adress",address);
                                         person.put("birthdate", format.parse(birthDate));
-                                        person.put("phone","966991826");
+                                        person.put("phone",phone);
                                         attemptPerson(person);
                                     }catch (JSONException e){
                                         e.printStackTrace();
