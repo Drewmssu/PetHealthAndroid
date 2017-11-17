@@ -6,14 +6,34 @@
     android:layout_height="match_parent"
     tools:context="pe.edu.upc.pethealth.fragments.MyTipDetailFragment">
 
-    <com.androidnetworking.widget.ANImageView
-        android:id="@+id/detailImageView"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layoutImage"
         android:layout_width="368dp"
         android:layout_height="240dp"
-        android:src="@mipmap/ic_launcher"
         android:scaleType="center"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="-482dp" />
+        android:layout_marginTop="-482dp">>
+        <ImageView
+            android:id="@+id/detailImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="centerCrop"/>
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AVLoadingIndicatorView"
+            android:visibility="visible"
+            app:indicatorName="BallPulseIndicator"
+            app:indicatorColor="@color/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+    </android.support.constraint.ConstraintLayout>
+
     <TextView
         android:id="@+id/tittleDetailTextView"
         android:layout_width="wrap_content"
@@ -23,7 +43,7 @@
         android:textColor="@color/colorPrimaryText"
         android:layout_margin="@dimen/big_margin"
         android:textAppearance="?android:textAppearanceLarge"
-        app:layout_constraintTop_toBottomOf="@+id/detailImageView"
+        app:layout_constraintTop_toBottomOf="@+id/layoutImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
     <TextView
