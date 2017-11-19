@@ -21,12 +21,13 @@ public class MyPet {
     private String description;
     private String image;
     private String animalType;
+    private int ownerId;
 
     public MyPet() {
 
     }
 
-    public MyPet(int id, String name, String race, String birthDate, String description, String image, String animalType) {
+    public MyPet(int id, String name, String race, String birthDate, String description, String image, String animalType, int ownerId) {
         this.id = id;
         this.name = name;
         this.race = race;
@@ -34,6 +35,7 @@ public class MyPet {
         this.description = description;
         this.image = image;
         this.animalType = animalType;
+        this.ownerId = ownerId;
     }
 
     public String getAnimalType() {
@@ -99,6 +101,13 @@ public class MyPet {
         return this;
     }
 
+    public int getOwnerId(){ return  ownerId; }
+
+    public MyPet setOwnerId(int ownerId){
+        this.ownerId = ownerId;
+        return this;
+    }
+
     public Bundle toBundle(){
         Bundle bundle = new Bundle();
         bundle.putInt("id",id);
@@ -108,6 +117,7 @@ public class MyPet {
         bundle.putString("description",description);
         bundle.putString("image",image);
         bundle.putString("animalType",animalType);
+        bundle.putInt("ownerId", ownerId);
         return bundle;
     }
 
@@ -119,7 +129,8 @@ public class MyPet {
                 .setBirthDate(bundle.getString("birthDate"))
                 .setDescription(bundle.getString("description"))
                 .setImage(bundle.getString("image"))
-                .setAnimalType(bundle.getString("animalType"));
+                .setAnimalType(bundle.getString("animalType"))
+                .setOwnerId(bundle.getInt("ownerId"));
         return myPet;
     }
 
@@ -132,7 +143,8 @@ public class MyPet {
                     .setBirthDate(json.getString("birthDate"))//TODO fix birthDate
                     .setDescription(json.getString("description"))
                     .setImage(json.getString("photo"))
-                    .setAnimalType(json.getString("animalTypeName"));
+                    .setAnimalType(json.getString("animalTypeName"))
+                    .setOwnerId(json.getInt("ownerId"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

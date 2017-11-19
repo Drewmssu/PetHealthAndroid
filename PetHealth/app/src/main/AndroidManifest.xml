@@ -3,7 +3,7 @@
     package="pe.edu.upc.pethealth">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -23,7 +23,8 @@
             android:name=".activities.StartActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,9 +60,15 @@
             android:name=".fragments.AboutVeterinaryFragment"
             android:label="@string/title_activity_about_veterinary"></fragment
         -->
-        <activity android:name=".activities.AddPetActivity"
+        <activity
+            android:name=".activities.AddPetActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity android:name=".activities.AddTipActivity" />
+        <activity
+            android:name=".activities.AddAppointmentActivity"
+            android:label="@string/title_activity_add_appointment"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:parentActivityName=".activities.MainActivity"/>
-        <activity android:name=".activities.AddTipActivity"></activity>
     </application>
 
 </manifest>

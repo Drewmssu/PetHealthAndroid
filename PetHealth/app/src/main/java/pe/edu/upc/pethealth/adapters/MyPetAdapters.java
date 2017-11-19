@@ -1,6 +1,7 @@
 package pe.edu.upc.pethealth.adapters;
 
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,7 @@ import com.wang.avi.AVLoadingIndicatorView;
 import java.util.List;
 
 import pe.edu.upc.pethealth.R;
-import pe.edu.upc.pethealth.fragments.HistoryClinicFragment;
+import pe.edu.upc.pethealth.fragments.AppointmentFragment;
 import pe.edu.upc.pethealth.activities.MainActivity;
 import pe.edu.upc.pethealth.fragments.MyPetDescriptionFragment;
 import pe.edu.upc.pethealth.models.MyPet;
@@ -64,9 +65,13 @@ public class MyPetAdapters extends RecyclerView.Adapter<MyPetAdapters.ViewHolder
             @Override
             public void onClick(View view) {
                 MainActivity context = (MainActivity) view.getContext();
-                HistoryClinicFragment newFragment = new HistoryClinicFragment();
+                AppointmentFragment newFragment = new AppointmentFragment();
                 //TODO add the bundle of HistoryClinic
-                //newFragment.setArguments(myHistoryClinic.toBundle());
+                Bundle bundle = new Bundle();
+                bundle.putInt("userId",myPet.getOwnerId());
+                bundle.putInt("petId",myPet.getId());
+                bundle.putString("pet",myPet.getName());
+                newFragment.setArguments(bundle);
                 context.getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content, newFragment)
                         .addToBackStack(null)

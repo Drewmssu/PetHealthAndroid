@@ -1,5 +1,7 @@
 package pe.edu.upc.pethealth.models;
 
+import android.os.Bundle;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -96,16 +98,40 @@ public class Appointment {
         return this;
     }
 
+    public Bundle toBundle(){
+        Bundle bundle = new Bundle();
+        bundle.putInt("appointmentId",id);
+        bundle.putString("vet",vetName);
+        bundle.putString("veterinary",veterinaryName);
+        bundle.putString("pet",petName);
+        bundle.putString("date",date);
+        bundle.putString("description",description);
+        bundle.putString("prescription",prescription);
+        return bundle;
+    }
+
+    public static Appointment from(Bundle bundle){
+        Appointment appointment = new Appointment();
+        appointment.setId(bundle.getInt("appointmentId"))
+                .setVetName(bundle.getString("vet"))
+                .setVeterinaryName(bundle.getString("veterinary"))
+                .setPetName(bundle.getString("pet"))
+                .setDate(bundle.getString("date"))
+                .setDescription(bundle.getString("description"))
+                .setPrescription(bundle.getString("prescription"));
+        return appointment;
+    }
+
     public static Appointment from(JSONObject jsonObject){
         Appointment appointment = new Appointment();
         try {
             appointment.setId(jsonObject.getInt("appointmentId"))
-                    .setVetName("vet")
-                    .setVeterinaryName("veterinary")
-                    .setPetName("pet")
-                    .setDate("date")
-                    .setDescription("description")
-                    .setPrescription("prescriptiomn");
+                    .setVetName(jsonObject.getString("vet"))
+                    .setVeterinaryName(jsonObject.getString("veterinary"))
+                    .setPetName(jsonObject.getString("pet"))
+                    .setDate(jsonObject.getString("date"))
+                    .setDescription(jsonObject.getString("description"))
+                    .setPrescription(jsonObject.getString("prescription"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
