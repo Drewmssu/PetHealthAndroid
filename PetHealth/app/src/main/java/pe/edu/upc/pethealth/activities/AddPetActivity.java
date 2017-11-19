@@ -5,6 +5,12 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.Camera;
+import android.hardware.Camera.CameraInfo;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +22,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -25,23 +33,33 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import pe.edu.upc.pethealth.PhotoHandler;
 import pe.edu.upc.pethealth.R;
 import pe.edu.upc.pethealth.models.User;
 import pe.edu.upc.pethealth.network.PetHealthApiService;
 
 public class AddPetActivity extends AppCompatActivity {
 
+    private Camera camera;
+    private int cameraId = 0;
     EditText nameEditText;
     EditText raceEditText;
     EditText birthDateEditText;
     EditText descriptionEditText;
+    TextView cameraTextView;
     Button addButton;
+    Button cameraButton;
     DatePickerDialog datePickerDialog;
     private User user;
+    int TAKE_PHOTO_CODE = 0;
+    public static int count = 0;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     Calendar calendar = Calendar.getInstance();
     int yy= calendar.get(Calendar.YEAR);
@@ -57,6 +75,8 @@ public class AddPetActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_petToolbar);
         setSupportActionBar(myToolbar);
         myToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+        cameraButton = (Button) findViewById(R.id.cameraButton);
+        cameraTextView = (TextView) findViewById(R.id.cameraTextView);
         user = User.from(getIntent().getExtras());
         nameEditText = (EditText) findViewById(R.id.petTittleTextView);
         raceEditText = (EditText) findViewById(R.id.petRaceEditText);
@@ -87,12 +107,35 @@ public class AddPetActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 attempToAddPet();
             }
         });
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dispatchTakePictureIntent();
+            }
+        });
+    }
+
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == TAKE_PHOTO_CODE && resultCode == RESULT_OK) {
+            Log.d(getString(R.string.app_name),"Pet Pic Saved");
+        }
     }
 
     @Override
