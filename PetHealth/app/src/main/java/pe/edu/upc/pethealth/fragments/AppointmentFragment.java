@@ -39,6 +39,7 @@ public class AppointmentFragment extends Fragment {
     private RecyclerView.LayoutManager appointmentLayoutManager;
     private FloatingActionButton addAppointmentFloatingActionButton;
     List<Appointment> appointments;
+    int petId;
     public AppointmentFragment() {
         // Required empty public constructor
     }
@@ -48,7 +49,7 @@ public class AppointmentFragment extends Fragment {
                              Bundle savedInstanceState) {
         final Bundle bundle = getArguments();
         int ownerId = bundle.getInt("ownerId");
-        int petId = bundle.getInt("petId");
+        petId = bundle.getInt("petId");
         String fragmentName = bundle.getString("pet")+"'s Appointments";
         View view = inflater.inflate(R.layout.fragment_appointment, container, false);
         ((MainActivity)getActivity()).setFragmentToolbar(fragmentName,true,getFragmentManager());
@@ -62,7 +63,7 @@ public class AppointmentFragment extends Fragment {
         addAppointmentFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Context context = getActivity().getApplicationContext();
+                Context context = view.getContext();
                 Intent intent = new Intent(context, AddAppointmentActivity.class);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
@@ -72,8 +73,15 @@ public class AppointmentFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateAppointment();
+    }
+
     private void updateAppointment(){
         AndroidNetworking.get(PetHealthApiService.APPOINTMENT_URL)
+                .addQueryParameter("petId",String.valueOf(petId))
                 .setPriority(Priority.LOW)
                 .setTag(R.string.app_name)
                 .build()

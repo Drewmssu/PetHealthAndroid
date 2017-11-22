@@ -74,7 +74,7 @@ public class AddPetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_pet);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_petToolbar);
         setSupportActionBar(myToolbar);
-        myToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+        myToolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
         cameraButton = (Button) findViewById(R.id.cameraButton);
         cameraTextView = (TextView) findViewById(R.id.cameraTextView);
         user = User.from(getIntent().getExtras());
@@ -144,6 +144,7 @@ public class AddPetActivity extends AppCompatActivity {
             case android.R.id.home:
                 Intent intent = new Intent(context, MainActivity.class);
                 context.startActivity(intent);
+                finish();
                 return  true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -223,11 +224,14 @@ public class AddPetActivity extends AppCompatActivity {
                                             dialogInterface.cancel();
                                             Intent intent = new Intent(context, MainActivity.class);
                                             context.startActivity(intent);
+                                            finish();
                                         }
                                     });
                                     AlertDialog alertDialog = builder.create();
                                     alertDialog.show();
                                 } else {
+                                    Toast toast = Toast.makeText(context,"Error",Toast.LENGTH_SHORT);
+                                    toast.show();
                                     Log.d(getString(R.string.app_name), "Error with the Resgistration of Pet");
                                 }
                             }catch (JSONException e) {

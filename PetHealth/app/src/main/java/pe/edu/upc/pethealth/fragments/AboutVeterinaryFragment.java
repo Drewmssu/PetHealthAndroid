@@ -39,6 +39,7 @@ public class AboutVeterinaryFragment extends Fragment implements OnMapReadyCallb
         veterinary = Veterinary.from(getArguments());
         nameTextView = (TextView)view.findViewById(R.id.nameTextView);
         rateRatingBar = (RatingBar)view.findViewById(R.id.veterinaryRatingBar);
+        rateRatingBar.setEnabled(false);
         nameTextView.setText(veterinary.getName());
         rateRatingBar.setRating(veterinary.getRating());
         lat = veterinary.getLatitude();

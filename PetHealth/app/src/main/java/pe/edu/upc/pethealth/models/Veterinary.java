@@ -26,6 +26,9 @@ public class Veterinary {
     public Veterinary() {
     }
 
+    public String toString(){
+        return name;
+    }
 
     public Veterinary(String id, String name, String preVideo, String phoneNumber, Double longitude, Double latitude, String openingHours, Float rating) {
         this.id = id;

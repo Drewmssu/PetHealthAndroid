@@ -89,6 +89,12 @@ public class MyPetsFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updatePets();
+    }
+
     private void updatePets(){
         AndroidNetworking.get(PetHealthApiService.PET_URL)
                 .setPriority(Priority.LOW)
@@ -112,6 +118,4 @@ public class MyPetsFragment extends Fragment {
                     }
                 });
     }
-
-
 }

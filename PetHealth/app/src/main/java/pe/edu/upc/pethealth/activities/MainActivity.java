@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle(toolbarTitle);
         Integer icon;
         if(backIcon) {
-            icon = R.drawable.ic_chevron_left_black_24dp;
+            icon = R.drawable.ic_arrow_back_24dp;
             toolbar.setNavigationIcon(icon);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override

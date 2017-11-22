@@ -1,5 +1,6 @@
 package pe.edu.upc.pethealth.activities;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -30,7 +31,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-
+import java.util.Date;
 import pe.edu.upc.pethealth.R;
 import pe.edu.upc.pethealth.models.DocumentType;
 import pe.edu.upc.pethealth.network.PetHealthApiService;
@@ -76,6 +77,7 @@ public class SignUpActivity extends AppCompatActivity {
         birthDateEditText = (EditText) findViewById(R.id.birthDateEditText);
         phoneEditText = (EditText) findViewById(R.id.phoneEditText);
         birthDateEditText.setOnClickListener(new View.OnClickListener(){
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
                 //Esconde el teclado en caso se haya clickeado algun otro view antes de este
@@ -96,6 +98,16 @@ public class SignUpActivity extends AppCompatActivity {
                             }
                         },yy,mm,dd);
                 calendar.set(yy,mm,dd);
+                SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+                Date maxDate = new Date();
+                Date minDate = new Date();
+                try {
+                    minDate = f.parse("01/01/1950");
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                datePickerDialog.getDatePicker().setMaxDate(maxDate.getTime());
+                datePickerDialog.getDatePicker().setMinDate(minDate.getTime());
                 datePickerDialog.show();
             }
         });
