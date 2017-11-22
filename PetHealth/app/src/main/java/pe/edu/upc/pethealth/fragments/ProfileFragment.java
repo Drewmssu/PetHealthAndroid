@@ -55,7 +55,7 @@ public class ProfileFragment extends Fragment {
         ((MainActivity)getActivity()).setFragmentToolbar("Profile",true,getFragmentManager());
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         person = new Person();
-        Bundle b = getArguments();
+        final Bundle b = getArguments();
         loadingIndicatorView = (AVLoadingIndicatorView) view.findViewById(R.id.avi);
         tittleTextView = (TextView) view.findViewById(R.id.tittleTextView);
         photoANImageView = (ImageView) view.findViewById(R.id.profileImageView);
@@ -68,6 +68,14 @@ public class ProfileFragment extends Fragment {
         addressTextView = (TextView) view.findViewById(R.id.addressDataTextView);
         editButton = (Button) view.findViewById(R.id.editValuesButton);
         updateProfile(b);
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserInformationFragment userInformationFragment = new UserInformationFragment();
+                userInformationFragment.setArguments(b);
+                getFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.content,userInformationFragment).commit();
+            }
+        });
         return view;
     }
 
@@ -82,13 +90,16 @@ public class ProfileFragment extends Fragment {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONObject res = response.getJSONArray("res").getJSONObject(0);
-                            person = new Person(res.getInt("id"),
-                                    res.getString("name"),
-                                    res.getString("lastname"),
-                                    res.getString("nrodocumento"),
-                                    res.getString("phone"),
-                                    res.getString("address")
-                            );
+                            if (res.getString("name") != null) {
+                                person = new Person(res.getInt("id"),
+                                        res.getString("name"),
+                                        res.getString("lastname"),
+                                        res.getString("nrodocumento"),
+                                        res.getString("address"),
+                                        res.getString("phone"),
+                                        res.getString("birthdate"),
+                                        res.getInt("tipodocumentoId")
+                                );
                             photoANImageView.setImageResource(R.mipmap.ic_launcher);
                             //photoANImageView.setDefaultImageResId(R.mipmap.ic_launcher_round);
                             //photoANImageView.setErrorImageResId(R.mipmap.ic_launcher_round);
@@ -100,12 +111,7 @@ public class ProfileFragment extends Fragment {
                             phoneTextView.setText(person.getPhone());
                             addressTextView.setText(person.getAddress());
                             loadImage("http://jbblog.flopro.taco-hvac.com/wp-content/uploads/2014/05/smart-person.jpg");
-                            editButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-
-                                }
-                            });
+                        }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
