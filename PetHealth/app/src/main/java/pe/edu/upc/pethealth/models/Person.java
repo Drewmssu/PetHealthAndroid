@@ -8,22 +8,44 @@ import android.os.Bundle;
 
 public class Person  extends User{
         private int id;
+
         private String name;
         private String lastName;
         private String dni;
         private String address;
         private String phone;
-
+        private String birthdate;
+        private int tipoDocumentoId;
         public Person() {
         }
 
-    public Person(int id, String name,String lastName, String dni,String phone, String address) {
+    public Person(int id, String name, String lastName, String dni, String address, String phone, String birthdate, int tipoDocumentoId) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.dni = dni;
         this.address = address;
         this.phone = phone;
+        this.birthdate = birthdate;
+        this.tipoDocumentoId = tipoDocumentoId;
+    }
+
+    public String getBirthdate() {
+        return birthdate;
+    }
+
+    public Person setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+        return this;
+    }
+
+    public int getTipoDocumentoId() {
+        return tipoDocumentoId;
+    }
+
+    public Person setTipoDocumentoId(int tipoDocumentoId) {
+        this.tipoDocumentoId = tipoDocumentoId;
+        return this;
     }
 
     public int getId() {

@@ -1,6 +1,8 @@
 package pe.edu.upc.pethealth.activities;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -122,6 +124,16 @@ public class StartActivity extends AppCompatActivity {
                                     context.startActivity(intent);
                                 } else {
                                     Log.d(getString(R.string.app_name), "User and password are incorrect");
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                    builder.setMessage("User and password are incorrect");
+                                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                        }
+                                    });
+                                    AlertDialog alertDialog = builder.create();
+                                    alertDialog.show();
                                 }
 
                             } catch (JSONException e) {
