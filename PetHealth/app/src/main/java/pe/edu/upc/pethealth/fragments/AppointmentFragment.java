@@ -80,8 +80,7 @@ public class AppointmentFragment extends Fragment {
     }
 
     private void updateAppointment(){
-        AndroidNetworking.get(PetHealthApiService.APPOINTMENT_URL)
-                .addQueryParameter("petId",String.valueOf(petId))
+        AndroidNetworking.get(PetHealthApiService.APPOINTMENT_URL+"/"+petId)
                 .setPriority(Priority.LOW)
                 .setTag(R.string.app_name)
                 .build()

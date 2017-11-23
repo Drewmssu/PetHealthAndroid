@@ -122,6 +122,7 @@ public class StartActivity extends AppCompatActivity {
                                     Intent intent = new Intent(context, MainActivity.class);
                                     intent.putExtras(user.toBundle());
                                     context.startActivity(intent);
+                                    finish();
                                 } else {
                                     Log.d(getString(R.string.app_name), "User and password are incorrect");
                                     AlertDialog.Builder builder = new AlertDialog.Builder(context);

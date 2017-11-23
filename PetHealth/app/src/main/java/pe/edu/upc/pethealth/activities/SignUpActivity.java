@@ -65,7 +65,14 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sing_up);
         documentTypeSpinner = (Spinner) findViewById(R.id.documentTypeSpinner);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        myToolbar.setNavigationIcon(R.drawable.ic_chevron_left_black_24dp);
+        myToolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), StartActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
         setSupportActionBar(myToolbar);
         nameEditText =(EditText) findViewById(R.id.nameEditText);
         lastNameEditText=(EditText) findViewById(R.id.lastNameEditText);

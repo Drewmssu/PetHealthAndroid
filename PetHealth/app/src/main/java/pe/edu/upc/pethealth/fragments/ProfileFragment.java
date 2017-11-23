@@ -56,12 +56,11 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         person = new Person();
         final Bundle b = getArguments();
+        tittleTextView = (TextView) view.findViewById(R.id.tittleTextView);
         loadingIndicatorView = (AVLoadingIndicatorView) view.findViewById(R.id.avi);
         tittleTextView = (TextView) view.findViewById(R.id.tittleTextView);
         photoANImageView = (ImageView) view.findViewById(R.id.profileImageView);
         photoANImageView.setVisibility(View.INVISIBLE);
-        nameTextView = (TextView) view.findViewById(R.id.nameDataTextView);
-        lastNameTextView = (TextView) view.findViewById(R.id.lastNameDataTextView);
         dniTextView = (TextView) view.findViewById(R.id.dniDataTextView);
         mailTextView = (TextView) view.findViewById(R.id.mailDataTextView);
         phoneTextView =(TextView) view.findViewById(R.id.phoneDataTextView);
@@ -104,8 +103,7 @@ public class ProfileFragment extends Fragment {
                             //photoANImageView.setDefaultImageResId(R.mipmap.ic_launcher_round);
                             //photoANImageView.setErrorImageResId(R.mipmap.ic_launcher_round);
                             //photoANImageView.setImageUrl("http://jbblog.flopro.taco-hvac.com/wp-content/uploads/2014/05/smart-person.jpg");//TODO change for profile image url
-                            nameTextView.setText(person.getName());
-                            lastNameTextView.setText(person.getLastName());
+                            tittleTextView.setText(person.getName()+" "+person.getLastName());
                             dniTextView.setText(person.getDni());
                             mailTextView.setText(bundle.getString("mail"));
                             phoneTextView.setText(person.getPhone());

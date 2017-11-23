@@ -37,6 +37,7 @@ import java.util.List;
 
 import pe.edu.upc.pethealth.R;
 import pe.edu.upc.pethealth.activities.AddPetActivity;
+import pe.edu.upc.pethealth.activities.MainActivity;
 import pe.edu.upc.pethealth.activities.SignUpActivity;
 import pe.edu.upc.pethealth.activities.StartActivity;
 import pe.edu.upc.pethealth.models.DocumentType;
@@ -89,12 +90,12 @@ public class UserInformationFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_information, container, false);
+        ((MainActivity)getActivity()).setFragmentToolbar("Edit Profile",true,getFragmentManager());
         //Initiate models
          bundle = getArguments();
          jsonPerson = new JSONObject();
         documentTypeList = new ArrayList<DocumentType>();
         //Assign values
-        editTextView = (TextView) view.findViewById(R.id.editTextView);
         nameTextView = (TextView) view.findViewById(R.id.profileNameTextView);
         lastNameTextView = (TextView) view.findViewById(R.id.profileLastNameTextView);
         birthDateTextView = (TextView) view.findViewById(R.id.profileBirthDateTextView);
