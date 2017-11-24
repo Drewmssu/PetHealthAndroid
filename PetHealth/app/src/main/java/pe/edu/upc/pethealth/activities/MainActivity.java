@@ -74,11 +74,11 @@ public class MainActivity extends AppCompatActivity {
                     System.exit(0);
                     return true;
                 case R.id.navigation_profile:
-                    ProfileFragment newfragment = new ProfileFragment();
-                    newfragment.setArguments(u.toBundle());
+                    ProfileFragment newFragment = new ProfileFragment();
+                    newFragment.setArguments(u.toBundle());
                     getSupportFragmentManager().beginTransaction()
                             .addToBackStack(null)
-                            .replace(R.id.content, newfragment).commit();
+                            .replace(R.id.content, newFragment).commit();
                     return true;
                 case R.id.navigation_search:
                     getSupportFragmentManager().beginTransaction()

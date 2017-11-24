@@ -101,7 +101,6 @@ public class SignUpActivity extends AppCompatActivity {
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         String email = emailEditText.getText().toString();
-        final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         View focusView = null;
         Boolean cancel = false;
 

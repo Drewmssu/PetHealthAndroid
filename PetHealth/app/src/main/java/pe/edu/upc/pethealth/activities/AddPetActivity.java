@@ -47,7 +47,6 @@ import pe.edu.upc.pethealth.network.PetHealthApiService;
 public class AddPetActivity extends AppCompatActivity {
 
     private Camera camera;
-    private int cameraId = 0;
     EditText nameEditText;
     EditText raceEditText;
     EditText birthDateEditText;
