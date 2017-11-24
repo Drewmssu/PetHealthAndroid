@@ -79,8 +79,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void updateProfile(final Bundle bundle){
-        AndroidNetworking.get(PetHealthApiService.CUSTOMER_URL)
-                .addQueryParameter("customerId",String.valueOf(bundle.getInt("user_id")))
+        AndroidNetworking.get(PetHealthApiService.CUSTOMER_URL+ "/" +String.valueOf(bundle.getInt("user_id")))
                 .setTag(getString(R.string.app_name))
                 .setPriority(Priority.LOW)
                 .build()
@@ -88,8 +87,8 @@ public class ProfileFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+                            if (response.getJSONArray("res") != null) {
                             JSONObject res = response.getJSONArray("res").getJSONObject(0);
-                            if (res.getString("name") != null) {
                                 person = new Person(res.getInt("id"),
                                         res.getString("name"),
                                         res.getString("lastname"),

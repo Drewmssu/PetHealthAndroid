@@ -1,12 +1,15 @@
 package pe.edu.upc.pethealth.activities;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -39,31 +42,16 @@ import pe.edu.upc.pethealth.network.PetHealthApiService;
 public class SignUpActivity extends AppCompatActivity {
 
     Button doneButton;
-    EditText birthDateEditText;
-    DatePickerDialog datePickerDialog;
-    List<DocumentType> documentTypeList;
-    DocumentType documentType;
     String tag;
-    Spinner documentTypeSpinner;
-    EditText nameEditText;
-    EditText lastNameEditText;
     EditText usernameEditText;
     TextInputEditText passwordEditText;
-    EditText addressEditText;
-    EditText dniEditText;
     EditText emailEditText;
-    EditText phoneEditText;
+    final Context context = this;
 
-    //Crea el calendario para la vista con la fecha de hoy
-    Calendar calendar = Calendar.getInstance();
-    int yy = calendar.get(Calendar.YEAR);
-    int mm = calendar.get(Calendar.MONTH);
-    int dd = calendar.get(Calendar.DAY_OF_MONTH);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sing_up);
-        documentTypeSpinner = (Spinner) findViewById(R.id.documentTypeSpinner);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         myToolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
         myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -74,50 +62,11 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
         setSupportActionBar(myToolbar);
-        nameEditText =(EditText) findViewById(R.id.nameEditText);
-        lastNameEditText=(EditText) findViewById(R.id.lastNameEditText);
         usernameEditText =(EditText) findViewById(R.id.usernameEditText);
         passwordEditText = (TextInputEditText) findViewById(R.id.passwordTextInputEditText);
-        addressEditText = (EditText) findViewById(R.id.addressTextInputEditText);
-        dniEditText = (EditText) findViewById(R.id.dniEditText);
+
         emailEditText =(EditText) findViewById(R.id.emailEditText);
-        birthDateEditText = (EditText) findViewById(R.id.birthDateEditText);
-        phoneEditText = (EditText) findViewById(R.id.phoneEditText);
-        birthDateEditText.setOnClickListener(new View.OnClickListener(){
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onClick(View view) {
-                //Esconde el teclado en caso se haya clickeado algun otro view antes de este
-                //para luego recien clickear el datepicker
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(birthDateEditText.getWindowToken(), 0);
 
-                //Asignando el valor escogido en calendar al EditText para que se muestre
-                datePickerDialog = new DatePickerDialog(SignUpActivity.this,
-                        new DatePickerDialog.OnDateSetListener(){
-
-                            @Override
-                            public void onDateSet(DatePicker datePicker, int selectedYY, int selectedMM, int selectedDD) {
-                                yy = selectedYY;
-                                mm = selectedMM;
-                                dd = selectedDD;
-                                birthDateEditText.setText(dd + "/" + (mm+1) + "/" + yy);
-                            }
-                        },yy,mm,dd);
-                calendar.set(yy,mm,dd);
-                SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-                Date maxDate = new Date();
-                Date minDate = new Date();
-                try {
-                    minDate = f.parse("01/01/1950");
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                datePickerDialog.getDatePicker().setMaxDate(maxDate.getTime());
-                datePickerDialog.getDatePicker().setMinDate(minDate.getTime());
-                datePickerDialog.show();
-            }
-        });
         doneButton = (Button) findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,10 +74,7 @@ public class SignUpActivity extends AppCompatActivity {
                 attemptToSignUp();
             }
         });
-
-        documentTypeList = new ArrayList<DocumentType>();
         tag = "PetHealth";
-        updateDocumentTypeList();
     }
 
     @Override
@@ -141,96 +87,39 @@ public class SignUpActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    private void updateDocumentTypeList(){
 
-        AndroidNetworking.get(PetHealthApiService.DOCTYPE_URL)
-                .setTag(tag)
-                .setPriority(Priority.LOW)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            if("error".equalsIgnoreCase(response.getString("status"))){
-                                Log.d(tag,response.getString("message"));
-                                return;
-                            }
-                            documentTypeList = DocumentType.from(response.getJSONArray("documents"));
-
-                            ArrayList<String> shortenings = new ArrayList<String>();
-                            for (int i =0; i<documentTypeList.size();i++){
-                                shortenings.add(documentTypeList.get(i).getShortening());
-                            }
-
-                            Spinner documentTypeSpinner = (Spinner)findViewById(R.id.documentTypeSpinner);
-                            documentTypeSpinner.setAdapter(new ArrayAdapter<String>(
-                                    SignUpActivity.this, android.R.layout.simple_spinner_item, shortenings));
-
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.d(tag, anError.getErrorBody());
-                    }
-                });
-    }
-
-    private void attemptPerson(JSONObject person){
-        final Context context = this;
-        AndroidNetworking.post(PetHealthApiService.SIGNUP_CUSTOMER)
-                .addJSONObjectBody(person)
-                .setTag(getString(R.string.app_name))
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            if ("done".equalsIgnoreCase(response.getString("status"))){
-                                Intent intent = new Intent(context, StartActivity.class);
-                                context.startActivity(intent);
-                            } else {
-                                Log.d(getString(R.string.app_name), "Error with the Resgistration of Person");
-                            }
-                        }catch (JSONException e){
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.d(getString(R.string.app_name), anError.getLocalizedMessage());
-                    }
-                });
-    }
     private void attemptToSignUp() {
         //Reset Errors
-        nameEditText.setError(null);
+
         passwordEditText.setError(null);
         usernameEditText.setError(null);
-        lastNameEditText.setError(null);
-        addressEditText.setError(null);
-        dniEditText.setError(null);
         emailEditText.setError(null);
-        birthDateEditText.setError(null);
+
 
         //Store values
-        final String name = nameEditText.getText().toString();
-        final String lastName= lastNameEditText.getText().toString();
+
         String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
-        final String address  =addressEditText.getText().toString();
-        final String dni = dniEditText.getText().toString();
-        final String birthDate = birthDateEditText.getText().toString();
         String email = emailEditText.getText().toString();
-        final String phone = phoneEditText.getText().toString();
         final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        final Integer documentTypeId = documentTypeSpinner.getSelectedItemPosition()+1;
         View focusView = null;
         Boolean cancel = false;
+
+        if(TextUtils.isEmpty(username)) {
+            usernameEditText.setError("This field is empty");
+            focusView = usernameEditText;
+            cancel = true;
+        }
+        if(TextUtils.isEmpty(password)) {
+            passwordEditText.setError("This field is empty");
+            focusView = passwordEditText;
+            cancel = true;
+        }
+        if(TextUtils.isEmpty(email)) {
+            emailEditText.setError("This field is empty");
+            focusView = emailEditText;
+            cancel = true;
+        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -258,22 +147,19 @@ public class SignUpActivity extends AppCompatActivity {
                             // do anything with response
                             try {
                                 if ("done".equalsIgnoreCase(response.getString("status"))) {
-                                    JSONObject person = new JSONObject();
-                                    try {
-                                        person.put("userId",response.getJSONObject("user").getString("UserId"));
-                                        person.put("name", name);
-                                        person.put("lastName",lastName);
-                                        person.put("nrodocumento",dni);
-                                        person.put("tipodocumento", documentTypeId);
-                                        person.put("adress",address);
-                                        person.put("birthdate", format.parse(birthDate));
-                                        person.put("phone",phone);
-                                        attemptPerson(person);
-                                    }catch (JSONException e){
-                                        e.printStackTrace();
-                                    } catch (ParseException e) {
-                                        e.printStackTrace();
-                                    }
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                    builder.setMessage("User Corretly Created");
+                                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                            Intent intent = new Intent(context, StartActivity.class);
+                                            context.startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+                                    AlertDialog alertDialog = builder.create();
+                                    alertDialog.show();
                                 } else {
                                     Log.d(getString(R.string.app_name), "Error with the Resgistration of User");
                                 }
