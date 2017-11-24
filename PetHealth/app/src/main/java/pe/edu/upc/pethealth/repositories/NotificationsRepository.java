@@ -12,18 +12,18 @@ import pe.edu.upc.pethealth.models.Notification;
 public class NotificationsRepository {
     public static List<Notification> getNotifications(){
         List<Notification> notifications=new ArrayList<>();
-        notifications.add(new Notification("Tittle 1","Vacuna en dos dias"));
-        notifications.add(new Notification("Tittle 2","Desparasitacion en dos dias"));
-        notifications.add(new Notification("Tittle 3","Corte en dos dias"));
-        notifications.add(new Notification("Tittle 4","Vacuna en dos dias"));
-        notifications.add(new Notification("Tittle 5","Control en dos dias"));
-        notifications.add(new Notification("Tittle 6","Vacuna en dos dias"));
-        notifications.add(new Notification("Tittle 7","Vacuna en dos dias"));
-        notifications.add(new Notification("Tittle 8","Vacuna en dos dias"));
-        notifications.add(new Notification("Tittle 9","Vacuna en dos dias"));
-        notifications.add(new Notification("Tittle 10","Vacuna en dos dias"));
-        notifications.add(new Notification("Tittle 11","Vacuna en dos dias"));
-        notifications.add(new Notification("Tittle 12","Vacuna en dos dias"));
+        notifications.add(new Notification("Recordatorio","Vacuna en dos dias"));
+        notifications.add(new Notification("Recordatorio","Desparasitacion en dos dias"));
+        notifications.add(new Notification("Importante","Corte en dos dias"));
+        notifications.add(new Notification("Cumpleaños","Celebra el cumpleaños de tu mascota"));
+        notifications.add(new Notification("Recordatorio","Control en dos dias"));
+        notifications.add(new Notification("Recordatorio","Vacuna en dos dias"));
+        notifications.add(new Notification("Recordatorio","Vacuna en dos dias"));
+        notifications.add(new Notification("Recordatorio","Vacuna en dos dias"));
+        notifications.add(new Notification("Recordatorio","Vacuna en dos dias"));
+        notifications.add(new Notification("Recordatorio","Vacuna en dos dias"));
+        notifications.add(new Notification("Recordatorio","Vacuna en dos dias"));
+        notifications.add(new Notification("Recordatorio","Vacuna en dos dias"));
         return notifications;
     }
 }
