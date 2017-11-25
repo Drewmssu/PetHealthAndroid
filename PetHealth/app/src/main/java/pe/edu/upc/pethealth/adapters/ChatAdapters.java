@@ -58,12 +58,10 @@ public class ChatAdapters extends RecyclerView.Adapter<ChatAdapters.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView chatImageView;
         TextView chatNameTextView;
         TextView messageTextView;
         public ViewHolder(View itemView) {
             super(itemView);
-            chatImageView = (ImageView) itemView.findViewById(R.id.chatImageView);
             chatNameTextView = (TextView) itemView.findViewById(R.id.chatNameTextView);
             messageTextView = (TextView) itemView.findViewById(R.id.messageTextView);
         }
