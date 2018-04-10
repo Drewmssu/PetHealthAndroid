@@ -133,7 +133,7 @@ public class AddAppointmentActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }catch (ParseException e){
-
+                    e.printStackTrace();
                 }
                 System.out.println(jsonObject);
                 AndroidNetworking.post(PetHealthApiService.ADD_APPOINTMENT_URL)
